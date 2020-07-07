@@ -1,0 +1,35 @@
+name: comunicacion
+description: Comunicacion Villada
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^0.1.2
+  flutter_launcher_icons: "^0.7.3"
+
+  cloud_firestore: ^0.12.10+2
+
+  firebase_auth: ^0.16.0
+  firebase_database: ^3.0.7
+  loading_overlay: ^0.2.1
+
+  date_field: ^0.1.2
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
