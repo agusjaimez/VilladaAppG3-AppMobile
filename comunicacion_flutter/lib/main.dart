@@ -75,8 +75,15 @@ var its_img = new Container(
   ),
 );
 
-class Principal extends StatelessWidget {
-  const Principal({Key key}) : super(key: key);
+
+
+class Principal extends StatefulWidget{
+  @override
+  _PrincipalState createState() => _PrincipalState();
+}
+
+
+class _PrincipalState extends State<Principal> {
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +102,7 @@ class Principal extends StatelessWidget {
                 margin: EdgeInsets.all(0.0),
                 padding: EdgeInsets.all(0.0),
                 child: Text(
-                  'Drawer Header',
+                  'Opciones',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -111,7 +118,8 @@ class Principal extends StatelessWidget {
                   subtitle: Text('Justificar las Faltas'),
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => F1()));
+                        MaterialPageRoute(builder: (context) => F1()
+                        ));
                   },
                 ),
                 new ListTile(
