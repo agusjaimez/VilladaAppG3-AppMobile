@@ -52,6 +52,7 @@ class WidgetOrigen extends StatelessWidget {
   }
 }
 
+// ignore: non_constant_identifier_names
 var its_img = new Container(
   height: 170,
   width: 170,
@@ -75,16 +76,12 @@ var its_img = new Container(
   ),
 );
 
-
-
-class Principal extends StatefulWidget{
+class Principal extends StatefulWidget {
   @override
   _PrincipalState createState() => _PrincipalState();
 }
 
-
 class _PrincipalState extends State<Principal> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,25 +114,24 @@ class _PrincipalState extends State<Principal> {
                   title: const Text('Formulario F1'),
                   subtitle: Text('Justificar las Faltas'),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => F1()
-                        ));
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => F1()));
                   },
                 ),
                 new ListTile(
                   title: const Text('Formulario F2'),
                   subtitle: Text('Retiro por Motivos Escolares'),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => F2()));
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => F2()));
                   },
                 ),
                 new ListTile(
                   title: const Text('Formulario F3'),
                   subtitle: Text('Retiro Anticipado'),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => F3()));
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => F3()));
                   },
                 ),
               ],
@@ -168,5 +164,3 @@ class _PrincipalState extends State<Principal> {
     );
   }
 }
-
-
