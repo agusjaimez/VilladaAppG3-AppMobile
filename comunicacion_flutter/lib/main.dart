@@ -180,7 +180,6 @@ class _PrincipalState extends State<Principal> {
     );
   }
 }
-<<<<<<< HEAD
 
 contenedor() {
   for (var i = 0; i <= 2; i++) {
@@ -194,5 +193,3 @@ contenedor() {
     );
   }
 }
-=======
->>>>>>> 8760c4a593f43bca96a13b1895dac105027cefce
