@@ -52,6 +52,7 @@ class WidgetOrigen extends StatelessWidget {
   }
 }
 
+// ignore: non_constant_identifier_names
 var its_img = new Container(
   height: 170,
   width: 170,
@@ -75,9 +76,12 @@ var its_img = new Container(
   ),
 );
 
-class Principal extends StatelessWidget {
-  const Principal({Key key}) : super(key: key);
+class Principal extends StatefulWidget {
+  @override
+  _PrincipalState createState() => _PrincipalState();
+}
 
+class _PrincipalState extends State<Principal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +99,7 @@ class Principal extends StatelessWidget {
                 margin: EdgeInsets.all(0.0),
                 padding: EdgeInsets.all(0.0),
                 child: Text(
-                  'Drawer Header',
+                  'Opciones',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -176,6 +180,7 @@ class Principal extends StatelessWidget {
     );
   }
 }
+<<<<<<< HEAD
 
 contenedor() {
   for (var i = 0; i <= 2; i++) {
@@ -189,3 +194,5 @@ contenedor() {
     );
   }
 }
+=======
+>>>>>>> 8760c4a593f43bca96a13b1895dac105027cefce
