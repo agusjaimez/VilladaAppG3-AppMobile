@@ -15,7 +15,6 @@ class _F1State extends State<F1> {
     return Scaffold(
       backgroundColor: Color(0xffe0e0e0),
       body: Center(
-        
         child: Container(
           width: 330,
           height: 425,
@@ -71,9 +70,7 @@ class _F1State extends State<F1> {
                 color: Colors.blue,
                 elevation: 6,
                 shape: StadiumBorder(),
-                onPressed: (){
-
-                },
+                onPressed: () {},
               ),
             ],
           ),

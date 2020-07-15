@@ -81,7 +81,7 @@ class Principal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('SideBar Prueba')),
+      appBar: AppBar(title: const Text('Home')),
       drawer: Drawer(
         child: Column(
           children: <Widget>[
@@ -110,24 +110,24 @@ class Principal extends StatelessWidget {
                   title: const Text('Formulario F1'),
                   subtitle: Text('Justificar las Faltas'),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => F1()));
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => F1()));
                   },
                 ),
                 new ListTile(
                   title: const Text('Formulario F2'),
                   subtitle: Text('Retiro por Motivos Escolares'),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => F2()));
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => F2()));
                   },
                 ),
                 new ListTile(
                   title: const Text('Formulario F3'),
                   subtitle: Text('Retiro Anticipado'),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => F3()));
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => F3()));
                   },
                 ),
               ],
@@ -153,7 +153,23 @@ class Principal extends StatelessWidget {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[],
+            children: <Widget>[
+              new Container(
+                //child: Text("hola"),
+                color: Colors.black,
+                height: 730.0,
+                width: 400,
+                margin: EdgeInsets.all(1),
+                //padding: EdgeInsets.only(bottom: 20),
+                alignment: Alignment.center,
+                child: Center(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[contenedor()]),
+                ),
+              ),
+              //new Container(color: Colors.black, height: 302.0, width: 400)
+            ],
           ),
         ),
       ),
@@ -161,4 +177,15 @@ class Principal extends StatelessWidget {
   }
 }
 
-
+contenedor() {
+  for (var i = 0; i <= 2; i++) {
+    return new Container(
+      margin: EdgeInsets.all(1),
+      //padding: EdgeInsets.all(74),
+      child: Text("hola"),
+      color: Colors.amber,
+      height: 20.0,
+      width: 380,
+    );
+  }
+}
