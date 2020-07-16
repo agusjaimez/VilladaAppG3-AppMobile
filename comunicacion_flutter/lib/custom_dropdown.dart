@@ -83,8 +83,8 @@ class _F1State extends State<F1> {
                 elevation: 6,
                 shape: StadiumBorder(),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => apretado()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => a()));
                 },
               ),
             ],
