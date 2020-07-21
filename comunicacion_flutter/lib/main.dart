@@ -156,27 +156,6 @@ class _PrincipalState extends State<Principal> {
       body: Container(
         child: Center(
           child: Column(
-<<<<<<< HEAD
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Container(
-                //child: Text("hola"),
-                color: Colors.black,
-                height: 730.0,
-                width: 400,
-                margin: EdgeInsets.all(1),
-                //padding: EdgeInsets.only(bottom: 20),
-                alignment: Alignment.center,
-                child: Center(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[contenedor()]),
-                ),
-              ),
-              //new Container(color: Colors.black, height: 302.0, width: 400)
-            ],
-          ),
-=======
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Card(
@@ -248,7 +227,6 @@ class _PrincipalState extends State<Principal> {
                   ),
                 )
               ]),
->>>>>>> Nicaor_Flutter
         ),
       ),
     );
