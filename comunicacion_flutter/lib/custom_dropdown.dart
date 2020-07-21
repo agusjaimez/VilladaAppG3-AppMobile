@@ -1,4 +1,3 @@
-import 'package:comunicacion/onpres.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -82,10 +81,14 @@ class _F1State extends State<F1> {
                 color: Colors.blue,
                 elevation: 6,
                 shape: StadiumBorder(),
+<<<<<<< HEAD
                 onPressed: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) => a()));
                 },
+=======
+                onPressed: null,
+>>>>>>> Nicaor_Flutter
               ),
             ],
           ),

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 
+<<<<<<< HEAD
 class a extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -51,3 +51,5 @@ class c extends StatelessWidget {
     );
   }
 }
+=======
+>>>>>>> Nicaor_Flutter

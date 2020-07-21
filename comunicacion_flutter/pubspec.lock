@@ -85,6 +85,16 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.8"
+<<<<<<< HEAD
+=======
+  english_words:
+    dependency: "direct main"
+    description:
+      name: english_words
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.5"
+>>>>>>> Nicaor_Flutter
   fake_async:
     dependency: transitive
     description:
