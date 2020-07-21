@@ -36,6 +36,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.3"
+  circular_check_box:
+    dependency: "direct main"
+    description:
+      name: circular_check_box
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   clock:
     dependency: transitive
     description:
@@ -86,6 +93,7 @@ packages:
     source: hosted
     version: "0.1.8"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   english_words:
     dependency: "direct main"
@@ -94,6 +102,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.5"
+>>>>>>> Nicaor_Flutter
+=======
 >>>>>>> Nicaor_Flutter
   fake_async:
     dependency: transitive
