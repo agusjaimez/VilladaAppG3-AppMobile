@@ -156,9 +156,77 @@ class _PrincipalState extends State<Principal> {
       body: Container(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[],
-          ),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Card(
+                  elevation: 5.2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0)),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(top: 14.0, left: 9.0),
+                        width: 325,
+                        height: 95,
+                        decoration: BoxDecoration(
+                          color: Color(0xffd6d6d6),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.only(left: 60.0),
+                              child: Text(
+                                'SALIDA A LOS GIGANTES',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 5.0),
+                            Container(
+                              padding: EdgeInsets.only(left: 60.0),
+                              child: Text(
+                                'Autorización',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  color: Colors.black.withOpacity(0.5),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 5.0),
+                            Container(
+                              padding: EdgeInsets.only(left: 60.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Atte: Prof:',
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Colors.black.withOpacity(0.6),
+                                    ),
+                                  ),
+                                  SizedBox(width: 2.0),
+                                  Text(
+                                    'Ruben Arce',
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Colors.black.withOpacity(0.5),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ]),
         ),
       ),
     );
