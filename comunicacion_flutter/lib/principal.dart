@@ -1,5 +1,7 @@
-import 'package:comunicacion/custom_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:comunicacion/custom_dropdown.dart';
+import 'package:comunicacion/utils/Slide.dart';
+import 'package:comunicacion/notificacionWidget.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 
 class Principal extends StatefulWidget {
@@ -10,9 +12,9 @@ class Principal extends StatefulWidget {
 class _PrincipalState extends State<Principal> {
   bool enabled = false;
 
-  double _scaleFactor = 1.0;
+  double _scaleFactor = 2.0;
 
-  _onPressed(BuildContext context) {
+  _onPressedW(BuildContext context) {
     print("CLICK");
   }
 
@@ -97,7 +99,9 @@ class _PrincipalState extends State<Principal> {
                     child: BouncingWidget(
                   scaleFactor: _scaleFactor,
                   onPressed: () {
-                    _onPressed(context);
+                    _onPressedW(context);
+                    Route route = Slide(builder: (context) => Notificacion());
+                    Navigator.push(context, route);
                     setState(() {
                       enabled = true;
                     });
@@ -140,7 +144,6 @@ class _PrincipalState extends State<Principal> {
                                       'Autorización',
                                       style: TextStyle(
                                         fontSize: 18.0,
-                                        color: Colors.black.withOpacity(0.5),
                                       ),
                                     ),
                                   ),
@@ -171,22 +174,6 @@ class _PrincipalState extends State<Principal> {
                     ),
                   ),
                 )),
-
-                /*Container(
-                  padding: EdgeInsets.only(top: 30.0, left: 5),
-                  child: ClipOval(
-                    child: Material(
-                      color: Colors.red,
-                      child: InkWell(
-                        splashColor: Colors.blue,
-                        child: SizedBox(
-                            width: 56, height: 56, child: Icon(Icons.check)),
-                        onTap: () {},
-                      ),
-                    ),
-                  ),
-                ),
-              */
               ],
             ),
           ],
