@@ -26,8 +26,11 @@ dev_dependencies:
 
 
 flutter:
-  
-  
+  fonts:
+    - family: Comfortaa
+      fonts:
+          - asset: fonts/Comfortaa-Regular.ttf
+
   uses-material-design: true
   assets:
     - assets/its.jpg
