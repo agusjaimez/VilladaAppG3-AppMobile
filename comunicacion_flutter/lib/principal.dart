@@ -131,8 +131,8 @@ class _PrincipalState extends State<Principal> {
                                     child: Text(
                                       'SALIDA A LOS GIGANTES',
                                       style: TextStyle(
-                                        fontSize: 20.0,
-                                        fontStyle: FontStyle.italic,
+                                        fontSize: 17.0,
+                                        fontFamily: 'Comfortaa',
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
