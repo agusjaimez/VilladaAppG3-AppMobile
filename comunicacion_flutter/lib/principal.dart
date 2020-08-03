@@ -100,7 +100,7 @@ class _PrincipalState extends State<Principal> {
                   scaleFactor: _scaleFactor,
                   onPressed: () {
                     _onPressedW(context);
-                    Route route = Slide(builder: (context) => Notificacion());
+                    Route route = SlideDuration(widget: Notificacion());
                     Navigator.push(context, route);
                     setState(() {
                       enabled = true;
