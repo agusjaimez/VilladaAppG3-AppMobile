@@ -1,6 +1,7 @@
 import 'package:comunicacion/custom_dropdown.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'posts.dart';
 
 void main() => runApp(MyApp());
 
@@ -86,102 +87,104 @@ class _PrincipalState extends State<Principal> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Home')),
-      drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: 120.0,
-              width: 310,
-              child: DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                margin: EdgeInsets.all(0.0),
-                padding: EdgeInsets.all(0.0),
-                child: Text(
-                  'Opciones',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
+      body: Posts(),
+      /*drawer: Drawer(
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: 120.0,
+                width: 310,
+                child: DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                  ),
+                  margin: EdgeInsets.all(0.0),
+                  padding: EdgeInsets.all(0.0),
+                  child: Text(
+                    'Opciones',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
                   ),
                 ),
               ),
-            ),
-            ExpansionTile(
-              title: Text('Crear Formularios para Alumno'),
-              children: <Widget>[
-                new ListTile(
-                  title: const Text('Formulario F1'),
-                  subtitle: Text('Justificar las Faltas'),
-                  onTap: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => F1()));
-                  },
-                ),
-                new ListTile(
-                  title: const Text('Formulario F2'),
-                  subtitle: Text('Retiro por Motivos Escolares'),
-                  onTap: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => F2()));
-                  },
-                ),
-                new ListTile(
-                  title: const Text('Formulario F3'),
-                  subtitle: Text('Retiro Anticipado'),
-                  onTap: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => F3()));
-                  },
-                ),
-              ],
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: ListTile(
-                  leading: Icon(Icons.power_settings_new),
-                  title: Text('Cerrar Sesion'),
-                  onTap: () {
-                    Navigator.popUntil(context,
-                        ModalRoute.withName(Navigator.defaultRouteName));
-                  },
+              ExpansionTile(
+                title: Text('Crear Formularios para Alumno'),
+                children: <Widget>[
+                  new ListTile(
+                    title: const Text('Formulario F1'),
+                    subtitle: Text('Justificar las Faltas'),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => F1()));
+                    },
+                  ),
+                  new ListTile(
+                    title: const Text('Formulario F2'),
+                    subtitle: Text('Retiro por Motivos Escolares'),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => F2()));
+                    },
+                  ),
+                  new ListTile(
+                    title: const Text('Formulario F3'),
+                    subtitle: Text('Retiro Anticipado'),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => F3()));
+                    },
+                  ),
+                ],
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: ListTile(
+                    leading: Icon(Icons.power_settings_new),
+                    title: Text('Cerrar Sesion'),
+                    onTap: () {
+                      Navigator.popUntil(context,
+                          ModalRoute.withName(Navigator.defaultRouteName));
+                    },
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 20)
-          ],
-        ),
-      ),
-      body: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Container(
-                //child: Text("hola"),
-                color: Colors.black,
-                height: 730.0,
-                width: 400,
-                margin: EdgeInsets.all(1),
-                //padding: EdgeInsets.only(bottom: 20),
-                alignment: Alignment.center,
-                child: Center(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[contenedor()]),
-                ),
-              ),
-              //new Container(color: Colors.black, height: 302.0, width: 400)
+              SizedBox(height: 20)
             ],
           ),
         ),
-      ),
+        body: Container(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                  //child: Text("hola"),
+                  color: Colors.black,
+                  height: 730.0,
+                  width: 400,
+                  margin: EdgeInsets.all(1),
+                  //padding: EdgeInsets.only(bottom: 20),
+                  alignment: Alignment.center,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      /*children: new List.generate(10, (index) => contenedor()),*/
+                    ),
+                  ),
+                  //new Container(color: Colors.black, height: 302.0, width: 400)
+                ),
+              ],
+            ),
+          ),
+        )*/
     );
   }
 }
 
-contenedor() {
+/*contenedor() {
   for (var i = 0; i <= 2; i++) {
     return new Container(
       margin: EdgeInsets.all(1),
@@ -192,4 +195,4 @@ contenedor() {
       width: 380,
     );
   }
-}
+}*/
