@@ -34,4 +34,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/its.jpg
-    - assets/forrmulario.jpg
+    - assets/formulario.jpg

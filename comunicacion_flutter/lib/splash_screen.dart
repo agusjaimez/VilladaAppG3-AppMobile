@@ -28,15 +28,15 @@ class StartState extends State<SplashScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: Colors.lightBlueAccent,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              child: Image.asset('assets/forrmulario.jpg'),
+              child: Image.asset('assets/formulario.jpg'),
             ),
-            Padding(padding: EdgeInsets.only(top: 20)),
+            Padding(padding: EdgeInsets.only(top: 20, left: 10)),
             Text(
               'Hello, I am a Splash Screen, xd',
               style: TextStyle(
