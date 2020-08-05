@@ -76,13 +76,12 @@ class _PrincipalState extends State<Principal> {
               child: Align(
                 alignment: Alignment.bottomLeft,
                 child: ListTile(
-                  leading: Icon(Icons.power_settings_new),
-                  title: Text('Cerrar Sesion'),
-                  onTap: () {
-                    Navigator.popUntil(context,
-                        ModalRoute.withName(Navigator.defaultRouteName));
-                  },
-                ),
+                    leading: Icon(Icons.power_settings_new),
+                    title: Text('Cerrar Sesion'),
+                    onTap: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          'logScreen', ModalRoute.withName('principal'));
+                    }),
               ),
             ),
             SizedBox(height: 20)
