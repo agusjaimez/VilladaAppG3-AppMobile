@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './models.dart';
+
+import './models_example.dart';
 import './post.dart';
 
 class Posts extends StatefulWidget {
@@ -8,24 +9,24 @@ class Posts extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _PostStado createStale() => _PostStado();
+  _PostsState createState() => _PostsState();
 }
 
-class _PostStale extends State<Posts> {
+class _PostsState extends State<Posts> {
   final scrollController = ScrollController();
   PostsModel posts;
 
   @override
-  /*void initState() {
+  void initState() {
     posts = PostsModel();
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
           scrollController.offset) {
-        posts.leadMore();
+        posts.loadMore();
       }
     });
     super.initState();
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
