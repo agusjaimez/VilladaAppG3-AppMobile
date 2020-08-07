@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    sqflite: any
+    path_provider: any
 
   cupertino_icons: ^0.1.2
   flutter_launcher_icons: "^0.7.3"
