@@ -1,8 +1,9 @@
+import 'package:comunicacion/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:comunicacion/custom_dropdown.dart';
 import 'package:comunicacion/utils/Slide.dart';
-import 'package:comunicacion/notificacionWidget.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
+import 'custom_dropdown.dart';
+import 'notificacionWidget.dart';
 
 class Principal extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _PrincipalState extends State<Principal> {
     print("CLICK");
   }
 
+  final Auth _auth = Auth();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,9 +80,8 @@ class _PrincipalState extends State<Principal> {
                 child: ListTile(
                     leading: Icon(Icons.power_settings_new),
                     title: Text('Cerrar Sesion'),
-                    onTap: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          'logScreen', ModalRoute.withName('principal'));
+                    onTap: () async {
+                      await _auth.signOut();
                     }),
               ),
             ),

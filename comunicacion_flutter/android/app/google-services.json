@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "519358432493",
-    "firebase_url": "https://its-comunicacion-b06e8.firebaseio.com",
-    "project_id": "its-comunicacion-b06e8",
-    "storage_bucket": "its-comunicacion-b06e8.appspot.com"
+    "project_number": "248812199411",
+    "firebase_url": "https://comunicacion-its.firebaseio.com",
+    "project_id": "comunicacion-its",
+    "storage_bucket": "comunicacion-its.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:519358432493:android:fa4b8be61c1012a0feb8e4",
+        "mobilesdk_app_id": "1:248812199411:android:9c67bcd93dc723c68c4686",
         "android_client_info": {
           "package_name": "example.flutterapp.comunicacion"
         }
       },
       "oauth_client": [
         {
-          "client_id": "519358432493-dadkdtnc8mg27mhcsovqc4gv44l22qk8.apps.googleusercontent.com",
+          "client_id": "248812199411-07aguffmqt8903reu3klr730rqeh4uu5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC_oXgP7D4HW0ycnpmnwFPhOV4MS6qqONg"
+          "current_key": "AIzaSyALDxuvRMVj4nNEnrcGx72qz0Aj1QVZuaU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "519358432493-dadkdtnc8mg27mhcsovqc4gv44l22qk8.apps.googleusercontent.com",
+              "client_id": "248812199411-07aguffmqt8903reu3klr730rqeh4uu5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
