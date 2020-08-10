@@ -1,15 +1,20 @@
-import 'package:comunicacion/custom_dropdown.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:comunicacion/principal.dart';
+import 'package:comunicacion/widgetOrigen.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'posts.dart';
+=======
+import 'package:comunicacion/splash_screen.dart';
+>>>>>>> 3a8a62694e15a2d6dc67dfe4d3ecb788e0be6427
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    var materialApp = MaterialApp(
       title: 'Its_comunications',
+<<<<<<< HEAD
       home: new WidgetOrigen(),
     );
   }
@@ -193,6 +198,14 @@ class _PrincipalState extends State<Principal> {
       color: Colors.amber,
       height: 20.0,
       width: 380,
+=======
+      home: SplashScreen(),
+      routes: <String, WidgetBuilder>{
+        'logScreen': (BuildContext context) => WidgetOrigen(),
+        'principal': (BuildContext context) => Principal(),
+      },
+>>>>>>> 3a8a62694e15a2d6dc67dfe4d3ecb788e0be6427
     );
+    return materialApp;
   }
 }*/
