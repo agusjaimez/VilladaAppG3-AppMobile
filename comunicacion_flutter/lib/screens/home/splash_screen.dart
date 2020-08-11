@@ -1,6 +1,6 @@
+import 'package:comunicacion/screens/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:comunicacion/widgetOrigen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -22,8 +22,7 @@ class StartState extends State<SplashScreen> {
   }
 
   route() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => WidgetOrigen()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Wrapper()));
   }
 
   Widget build(BuildContext context) {
