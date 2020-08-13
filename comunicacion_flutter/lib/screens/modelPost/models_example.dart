@@ -1,14 +1,12 @@
 import 'dart:async';
+import 'package:english_words/english_words.dart';
 
 /// Example data as it might be returned by an external service
 /// ...this is often a `Map` representing `JSON` or a `FireStore` document
 Future<List<Map>> _getExampleServerData(int length) {
   return Future.delayed(Duration(seconds: 1), () {
     return List<Map>.generate(length, (int index) {
-      return {
-        /*"body": 
-            ,*/
-      };
+      return {"body": WordPair.random().asPascalCase};
     });
   });
 }
