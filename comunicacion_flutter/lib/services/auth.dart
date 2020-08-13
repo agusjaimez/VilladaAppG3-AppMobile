@@ -1,3 +1,4 @@
+import 'package:comunicacion/services/dataBase.dart';
 import 'package:comunicacion/utils/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -12,11 +13,16 @@ class Auth {
     return _auth.onAuthStateChanged.map(_userFromFirebase);
   }
 
-  Future registerEmailPassword(String email, String password) async {
+  Future registerEmailPassword(
+      String email, String password, String name) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
+
+      await DatabaseService(uid: user.uid)
+          .updatUserData(' nuevo nombre', 'nuevo apellido');
+
       return _userFromFirebase(user);
     } catch (e) {
       print(e.toString());

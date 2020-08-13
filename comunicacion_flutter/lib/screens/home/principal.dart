@@ -1,4 +1,4 @@
-import 'package:comunicacion/posts.dart';
+import 'package:comunicacion/screens/modelPost/posts.dart';
 import 'package:comunicacion/services/auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:comunicacion/utils/Slide.dart';
@@ -20,6 +20,7 @@ class _PrincipalState extends State<Principal> {
   // }
 
   final Auth _auth = Auth();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +46,7 @@ class _PrincipalState extends State<Principal> {
                 ),
               ),
             ),
+            Text('nombre'),
             ExpansionTile(
               title: Text('Crear Formularios para Alumno'),
               children: <Widget>[

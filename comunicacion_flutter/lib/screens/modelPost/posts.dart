@@ -1,7 +1,6 @@
-import 'package:comunicacion/post.dart';
 import 'package:flutter/material.dart';
-
-import './models_example.dart';
+import 'package:comunicacion/screens/modelPost/post.dart';
+import 'models_example.dart';
 
 class Posts extends StatefulWidget {
   const Posts({
