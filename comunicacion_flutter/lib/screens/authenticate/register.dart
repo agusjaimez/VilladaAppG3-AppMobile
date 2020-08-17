@@ -19,7 +19,6 @@ class _RegisterState extends State<Register> {
   String email = '';
   String password = '';
   String name = '';
-  String lastName = '';
   String error = '';
 
   Widget build(BuildContext context) {
@@ -51,10 +50,9 @@ class _RegisterState extends State<Register> {
               children: <Widget>[
                 SizedBox(height: 25),
                 its_img,
-                SizedBox(height: 35),
                 TextFormField(
                   validator: (val) =>
-                      val.isEmpty ? 'Porfavor ingrese un Nombre' : null,
+                      val.isEmpty ? 'Ingrese un Nombre adecuado' : null,
                   onChanged: (val) {
                     setState(() => name = val);
                   },

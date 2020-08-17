@@ -1,4 +1,3 @@
-import 'package:comunicacion/services/dataBase.dart';
 import 'package:comunicacion/utils/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,12 +17,14 @@ class Auth {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      FirebaseUser user = result.user;
 
-      await DatabaseService(uid: user.uid)
-          .updatUserData(' nuevo nombre', 'nuevo apellido');
+      FirebaseUser _firebaseuser = result.user;
+      UserUpdateInfo userInfo = UserUpdateInfo();
+      userInfo.displayName = name;
+      await _firebaseuser.updateProfile(userInfo);
+      await _firebaseuser.reload();
 
-      return _userFromFirebase(user);
+      return _firebaseuser.uid;
     } catch (e) {
       print(e.toString());
       return null;
