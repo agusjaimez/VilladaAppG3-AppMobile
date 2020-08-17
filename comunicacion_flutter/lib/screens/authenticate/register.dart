@@ -14,6 +14,10 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   final Auth _auth = Auth();
+
+  final TextEditingController _contra = TextEditingController();
+  final TextEditingController _confirmContra = TextEditingController();
+
   bool loading = false;
 
   String email = '';
@@ -50,6 +54,7 @@ class _RegisterState extends State<Register> {
               children: <Widget>[
                 SizedBox(height: 25),
                 its_img,
+                SizedBox(height: 20),
                 TextFormField(
                   validator: (val) =>
                       val.isEmpty ? 'Ingrese un Nombre adecuado' : null,
@@ -69,6 +74,7 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  controller: _contra,
                   validator: (val) => val.length < 6
                       ? 'Ingrese una contraseña mas segura'
                       : null,
@@ -77,7 +83,22 @@ class _RegisterState extends State<Register> {
                     setState(() => password = val);
                   },
                   decoration:
-                      textInputDecoration.copyWith(hintText: 'Password'),
+                      textInputDecoration.copyWith(hintText: 'Contraseña'),
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  controller: _confirmContra,
+                  validator: (val) {
+                    if (val.isEmpty)
+                      return 'Ingrese su contraseña otravez para confirmarla';
+                    if (val != _contra.text) {
+                      return 'Su contraseña no coincide';
+                    }
+                    return null;
+                  },
+                  obscureText: true,
+                  decoration: textInputDecoration.copyWith(
+                      hintText: 'Confirme su Contraseña'),
                 ),
                 SizedBox(height: 20),
                 RaisedButton(
@@ -87,11 +108,13 @@ class _RegisterState extends State<Register> {
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () async {
-                      print(name);
                       if (_formKey.currentState.validate()) {
                         dynamic result = await _auth.registerEmailPassword(
                             email, password, name);
-                        setState(() => loading = true);
+
+                        if (this.mounted) {
+                          setState(() => loading = true);
+                        }
                         if (result == null) {
                           setState(() {
                             error = 'Mail o Contraseña no son correctos';

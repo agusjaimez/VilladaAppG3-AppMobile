@@ -89,7 +89,9 @@ class _SignInState extends State<SignIn> {
                         shape: StadiumBorder(),
                         onPressed: () async {
                           if (_formKey.currentState.validate()) {
-                            setState(() => loading = true);
+                            if (this.mounted) {
+                              setState(() => loading = true);
+                            }
                             dynamic result = await _auth.signInEmailPassword(
                                 email, password);
                             if (result == null) {
