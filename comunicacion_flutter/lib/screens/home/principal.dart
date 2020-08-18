@@ -1,5 +1,5 @@
 import 'package:comunicacion/screens/modelPost/posts.dart';
-import 'package:comunicacion/services/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:comunicacion/utils/Slide.dart';
 // import 'package:bouncing_widget/bouncing_widget.dart';
@@ -19,7 +19,18 @@ class _PrincipalState extends State<Principal> {
   //   print("CLICK");
   // }
 
-  final Auth _auth = Auth();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseUser user;
+
+  void initState() {
+    super.initState();
+    initUser();
+  }
+
+  initUser() async {
+    user = await _auth.currentUser();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,21 +43,19 @@ class _PrincipalState extends State<Principal> {
               height: 120.0,
               width: 310,
               child: DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                margin: EdgeInsets.all(0.0),
-                padding: EdgeInsets.all(0.0),
-                child: Text(
-                  'Opciones',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
                   ),
-                ),
-              ),
+                  margin: EdgeInsets.all(0.0),
+                  padding: EdgeInsets.all(0.0),
+                  child: Text("${user.displayName}",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 21.0,
+                          color: Colors.white),
+                      textAlign: TextAlign.center)),
             ),
-            Text('nombre'),
             ExpansionTile(
               title: Text('Crear Formularios para Alumno'),
               children: <Widget>[
