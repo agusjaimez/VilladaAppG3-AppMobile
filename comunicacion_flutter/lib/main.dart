@@ -17,6 +17,7 @@ class _MyAppState extends State<MyApp> {
     return StreamProvider<User>.value(
       value: Auth().user,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Its_comunications',
         home: Wrapper(),
       ),
