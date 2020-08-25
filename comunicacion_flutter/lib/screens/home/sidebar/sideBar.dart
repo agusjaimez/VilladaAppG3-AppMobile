@@ -24,8 +24,8 @@ class _SideBarState extends State<SideBar>
 
   @override
   void initState() {
-    super.initState();
     initUser();
+    super.initState();
     _animationController =
         AnimationController(vsync: this, duration: _animationDuration);
     isSideBarOpenController = PublishSubject<bool>();
@@ -60,162 +60,165 @@ class _SideBarState extends State<SideBar>
 
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-
-    return StreamBuilder<bool>(
-      initialData: false,
-      stream: isSideBarOpenStream,
-      builder: (context, isSideBarOpenedAsync) {
-        return AnimatedPositioned(
-          duration: _animationDuration,
-          top: 0,
-          bottom: 0,
-          left: isSideBarOpenedAsync.data ? 0 : -screenWidth,
-          right: isSideBarOpenedAsync.data ? 0 : screenWidth - 50,
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  color: const Color(0xFF262AAA),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 100,
-                      ),
-                      ListTile(
-                        title: Text("${user.displayName}",
+    if (user != null) {
+      return StreamBuilder<bool>(
+        initialData: false,
+        stream: isSideBarOpenStream,
+        builder: (context, isSideBarOpenedAsync) {
+          return AnimatedPositioned(
+            duration: _animationDuration,
+            top: 0,
+            bottom: 0,
+            left: isSideBarOpenedAsync.data ? 0 : -screenWidth,
+            right: isSideBarOpenedAsync.data ? 0 : screenWidth - 50,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    color: const Color(0xFF262AAA),
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 100,
+                        ),
+                        ListTile(
+                          title: Text("${user.displayName}",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.w800,
+                              )),
+                          subtitle: Text(
+                            "${user.email}",
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontWeight: FontWeight.w800,
-                            )),
-                        subtitle: Text(
-                          "${user.email}",
-                          style: TextStyle(
-                            color: Color(0XFF1BB5FD),
-                            fontSize: 20,
-                          ),
-                        ),
-                        leading: CircleAvatar(
-                          child: Icon(
-                            Icons.perm_identity,
-                            color: Colors.white,
-                          ),
-                          radius: 40,
-                        ),
-                      ),
-                      Divider(
-                        height: 64,
-                        thickness: 0.5,
-                        color: Colors.white.withOpacity(0.4),
-                        indent: 32,
-                        endIndent: 32,
-                      ),
-                      ItemSideBar(
-                        onTap: () {
-                          onIconPressed();
-                          BlocProvider.of<NavigationBloc>(context)
-                              .add(NavigationEvents.PrincipalPageEvent);
-                        },
-                        icon: Icons.home,
-                        title: 'Home',
-                      ),
-                      ExpansionTile(
-                        title: Text(
-                          'Formularios',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
+                              color: Color(0XFF1BB5FD),
                               fontSize: 20,
-                              color: Colors.white),
+                            ),
+                          ),
+                          leading: CircleAvatar(
+                            child: Icon(
+                              Icons.perm_identity,
+                              color: Colors.white,
+                            ),
+                            radius: 40,
+                          ),
                         ),
-                        children: <Widget>[
-                          ItemSideBar(
-                            onTap: () {
-                              onIconPressed();
-                              BlocProvider.of<NavigationBloc>(context)
-                                  .add(NavigationEvents.FormularioF1Event);
-                            },
-                            icon: Icons.assignment,
-                            title: 'Justificar Faltas (F1)',
+                        Divider(
+                          height: 64,
+                          thickness: 0.5,
+                          color: Colors.white.withOpacity(0.4),
+                          indent: 32,
+                          endIndent: 32,
+                        ),
+                        ItemSideBar(
+                          onTap: () {
+                            onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                .add(NavigationEvents.PrincipalPageEvent);
+                          },
+                          icon: Icons.home,
+                          title: 'Home',
+                        ),
+                        ExpansionTile(
+                          title: Text(
+                            'Formularios',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w300,
+                                fontSize: 20,
+                                color: Colors.white),
                           ),
-                          ItemSideBar(
-                            onTap: () {
-                              onIconPressed();
-                              BlocProvider.of<NavigationBloc>(context)
-                                  .add(NavigationEvents.FormularioF2Event);
-                            },
-                            icon: Icons.assignment,
-                            title: 'Retiro imprevisto (F2)',
-                          ),
-                          ItemSideBar(
-                            onTap: () {
-                              onIconPressed();
-                              BlocProvider.of<NavigationBloc>(context)
-                                  .add(NavigationEvents.FormularioF3Event);
-                            },
-                            icon: Icons.assignment,
-                            title: 'Retiro Anticipado (F3)',
-                          ),
-                        ],
-                      ),
-                      ItemSideBar(
-                        onTap: () {
-                          onIconPressed();
-                          BlocProvider.of<NavigationBloc>(context)
-                              .add(NavigationEvents.FormularioF3Event);
-                        },
-                        icon: Icons.face,
-                        title: 'Informacion Alumno',
-                      ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: ListTile(
-                              leading: Icon(Icons.power_settings_new,
-                                  color: Colors.white),
-                              title: Text(
-                                'Cerrar Sesion',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 20,
+                          children: <Widget>[
+                            ItemSideBar(
+                              onTap: () {
+                                onIconPressed();
+                                BlocProvider.of<NavigationBloc>(context)
+                                    .add(NavigationEvents.FormularioF1Event);
+                              },
+                              icon: Icons.assignment,
+                              title: 'Justificar Faltas (F1)',
+                            ),
+                            ItemSideBar(
+                              onTap: () {
+                                onIconPressed();
+                                BlocProvider.of<NavigationBloc>(context)
+                                    .add(NavigationEvents.FormularioF2Event);
+                              },
+                              icon: Icons.assignment,
+                              title: 'Retiro imprevisto (F2)',
+                            ),
+                            ItemSideBar(
+                              onTap: () {
+                                onIconPressed();
+                                BlocProvider.of<NavigationBloc>(context)
+                                    .add(NavigationEvents.FormularioF3Event);
+                              },
+                              icon: Icons.assignment,
+                              title: 'Retiro Anticipado (F3)',
+                            ),
+                          ],
+                        ),
+                        ItemSideBar(
+                          onTap: () {
+                            onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                .add(NavigationEvents.FormularioF3Event);
+                          },
+                          icon: Icons.face,
+                          title: 'Informacion Alumno',
+                        ),
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: ListTile(
+                                leading: Icon(Icons.power_settings_new,
                                     color: Colors.white),
-                              ),
-                              onTap: () async {
-                                await _auth.signOut();
-                              }),
+                                title: Text(
+                                  'Cerrar Sesion',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 20,
+                                      color: Colors.white),
+                                ),
+                                onTap: () async {
+                                  await _auth.signOut();
+                                }),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Align(
-                alignment: Alignment(0, -0.9),
-                child: GestureDetector(
-                  onTap: () {
-                    onIconPressed();
-                  },
-                  child: ClipPath(
-                    clipper: CustomItem(),
-                    child: Container(
-                        width: 35,
-                        height: 110,
-                        color: Color(0xFF262AAA),
-                        alignment: Alignment.centerLeft,
-                        child: AnimatedIcon(
-                          progress: _animationController.view,
-                          icon: AnimatedIcons.menu_close,
-                          color: Color(0xFF1BB5FD),
-                          size: 25,
-                        )),
+                Align(
+                  alignment: Alignment(0, -0.9),
+                  child: GestureDetector(
+                    onTap: () {
+                      onIconPressed();
+                    },
+                    child: ClipPath(
+                      clipper: CustomItem(),
+                      child: Container(
+                          width: 35,
+                          height: 110,
+                          color: Color(0xFF262AAA),
+                          alignment: Alignment.centerLeft,
+                          child: AnimatedIcon(
+                            progress: _animationController.view,
+                            icon: AnimatedIcons.menu_close,
+                            color: Color(0xFF1BB5FD),
+                            size: 25,
+                          )),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
+              ],
+            ),
+          );
+        },
+      );
+    } else {
+      return CircularProgressIndicator();
+    }
   }
 }
 
