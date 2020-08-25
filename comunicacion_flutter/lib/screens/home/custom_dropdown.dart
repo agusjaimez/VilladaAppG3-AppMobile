@@ -1,7 +1,8 @@
+import 'package:comunicacion/block_navigation_block/navigation_block.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class F1 extends StatefulWidget {
+class F1 extends StatefulWidget with NavigationStates {
   @override
   _F1State createState() => _F1State();
 }
@@ -91,7 +92,7 @@ class _F1State extends State<F1> {
   }
 }
 
-class F2 extends StatefulWidget {
+class F2 extends StatefulWidget with NavigationStates {
   @override
   _F2State createState() => _F2State();
 }
@@ -189,7 +190,7 @@ class _F2State extends State<F2> {
   }
 }
 
-class F3 extends StatefulWidget {
+class F3 extends StatefulWidget with NavigationStates {
   @override
   _F3State createState() => _F3State();
 }
