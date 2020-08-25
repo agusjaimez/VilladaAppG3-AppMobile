@@ -6,7 +6,7 @@ enum NavigationEvents {
   PrincipalPageEvent,
   FormularioF1Event,
   FormularioF2Event,
-  FormularioF3Event
+  FormularioF3Event,
 }
 
 abstract class NavigationStates {}
