@@ -19,7 +19,7 @@ class ItemSideBar extends StatelessWidget {
             GestureDetector(
               child: Icon(
                 icon,
-                color: Colors.cyan,
+                color: Colors.blue.shade800,
                 size: 30,
               ),
             ),

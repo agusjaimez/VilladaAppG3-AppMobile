@@ -4,7 +4,7 @@ description: Comunicacion Villada
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.8.0 <3.0.0"
 
 
 dependencies:
@@ -13,10 +13,8 @@ dependencies:
   sqflite: any
   path_provider: any
     
-
   flutter_launcher_icons: "^0.7.3"
 
-  cloud_firestore: ^0.12.10+2
   firebase_auth: ^0.16.0
   firebase_database: ^3.0.7
   
@@ -30,6 +28,7 @@ dependencies:
 
   rxdart: ^0.24.1
   flutter_bloc: ^6.0.1
+  flutter_datetime_picker: ^1.2.5
 
 dev_dependencies:
   flutter_test:

@@ -21,7 +21,7 @@ class Post extends StatelessWidget {
               Navigator.push(context, PageRouteBuilder(pageBuilder:
                   (BuildContext context, Animation<double> animation,
                       Animation<double> secAnimaiton) {
-                return Form_notification();
+                return FormNotification();
               }));
             }));
   }

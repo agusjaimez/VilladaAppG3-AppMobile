@@ -76,7 +76,14 @@ class _SideBarState extends State<SideBar>
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    color: const Color(0xFF262AAA),
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [
+                          Colors.indigo.shade300,
+                          Colors.blue.shade700
+                        ])),
                     child: Column(
                       children: <Widget>[
                         SizedBox(
@@ -92,11 +99,12 @@ class _SideBarState extends State<SideBar>
                           subtitle: Text(
                             "${user.email}",
                             style: TextStyle(
-                              color: Color(0XFF1BB5FD),
+                              color: Colors.white,
                               fontSize: 20,
                             ),
                           ),
                           leading: CircleAvatar(
+                            backgroundColor: Colors.blue.shade800,
                             child: Icon(
                               Icons.perm_identity,
                               color: Colors.white,
@@ -200,7 +208,7 @@ class _SideBarState extends State<SideBar>
                       child: Container(
                           width: 35,
                           height: 110,
-                          color: Color(0xFF262AAA),
+                          color: Colors.indigo.shade300,
                           alignment: Alignment.centerLeft,
                           child: AnimatedIcon(
                             progress: _animationController.view,
