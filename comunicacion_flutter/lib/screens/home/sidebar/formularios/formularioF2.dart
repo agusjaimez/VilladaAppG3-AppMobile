@@ -11,12 +11,19 @@ class F2 extends StatefulWidget with NavigationStates {
 
 class _F2State extends State<F2> {
   String _hora = "Seleccione Hora";
+  // ignore: unused_field
+  String _nombre;
+  // ignore: unused_field
+  String _justificacion;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
+          key: _formKey,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -50,6 +57,15 @@ class _F2State extends State<F2> {
                       child: TextFormField(
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Nombre '),
+                        // ignore: missing_return
+                        validator: (String value) {
+                          if (value.isEmpty) {
+                            return 'Ingrese un Nombre Adecuado';
+                          }
+                        },
+                        onSaved: (String value) {
+                          _nombre = value;
+                        },
                         onChanged: (value) {
                           setState(() {});
                         },
@@ -114,7 +130,12 @@ class _F2State extends State<F2> {
                               style: TextStyle(
                                   fontSize: 16.0, color: Colors.white)),
                           color: Color(0xFF00838F),
-                          onPressed: null,
+                          onPressed: () {
+                            if (!_formKey.currentState.validate()) {
+                              return;
+                            }
+                            _formKey.currentState.save();
+                          },
                         )),
                     SizedBox(height: 50),
                   ],

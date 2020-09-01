@@ -11,12 +11,19 @@ class F1 extends StatefulWidget with NavigationStates {
 
 class _F1State extends State<F1> {
   String _date = "Seleccione Fecha";
+  // ignore: unused_field
+  String _nombre;
+  // ignore: unused_field
+  String _justificacion;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
+          key: _formKey,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -49,6 +56,15 @@ class _F1State extends State<F1> {
                       child: TextFormField(
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Nombre '),
+                        // ignore: missing_return
+                        validator: (String value) {
+                          if (value.isEmpty) {
+                            return 'Ingrese un Nombre Adecuado';
+                          }
+                        },
+                        onSaved: (String value) {
+                          _nombre = value;
+                        },
                         onChanged: (value) {
                           setState(() {});
                         },
@@ -58,11 +74,20 @@ class _F1State extends State<F1> {
                     Material(
                       elevation: 4.0,
                       shadowColor: Colors.black,
-                      child: TextField(
+                      child: TextFormField(
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         decoration: textInputDecoration.copyWith(
                             hintText: 'Justifique la Falta '),
+                        // ignore: missing_return
+                        validator: (String value) {
+                          if (value.isEmpty) {
+                            return 'Ingrese un Nombre Adecuado';
+                          }
+                        },
+                        onSaved: (String value) {
+                          _justificacion = value;
+                        },
                         onChanged: (value) {
                           setState(() {});
                         },
@@ -83,7 +108,7 @@ class _F1State extends State<F1> {
                               maxTime: DateTime(2020, 12, 31),
                               onConfirm: (date) {
                             print('confirm $date');
-                            _date = '${date.month} M - ${date.day} D';
+                            _date = 'M ${date.month}  - D ${date.day}';
                             setState(() {});
                           },
                               currentTime: DateTime.now(),
@@ -132,7 +157,12 @@ class _F1State extends State<F1> {
                               style: TextStyle(
                                   fontSize: 16.0, color: Colors.white)),
                           color: Color(0xFF00838F),
-                          onPressed: null,
+                          onPressed: () {
+                            if (!_formKey.currentState.validate()) {
+                              return;
+                            }
+                            _formKey.currentState.save();
+                          },
                         )),
                     SizedBox(height: 50),
                   ],
