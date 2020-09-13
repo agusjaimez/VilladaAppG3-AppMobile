@@ -18,7 +18,7 @@ class _SideBarState extends State<SideBar>
   Stream<bool> isSideBarOpenStream;
   StreamSink<bool> isSideBarOpenSink;
 
-  final _animationDuration = const Duration(milliseconds: 500);
+  final _animationDuration = const Duration(milliseconds: 100);
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseUser user;
 
@@ -66,12 +66,17 @@ class _SideBarState extends State<SideBar>
         stream: isSideBarOpenStream,
         builder: (context, isSideBarOpenedAsync) {
           return AnimatedPositioned(
+          
             duration: _animationDuration,
             top: 0,
             bottom: 0,
             left: isSideBarOpenedAsync.data ? 0 : -screenWidth,
-            right: isSideBarOpenedAsync.data ? 0 : screenWidth - 50,
+            right: isSideBarOpenedAsync.data ? 0 : screenWidth - 40,
+            
+            child:SafeArea(
+              
             child: Row(
+              
               children: <Widget>[
                 Expanded(
                   child: Container(
@@ -127,6 +132,7 @@ class _SideBarState extends State<SideBar>
                           },
                           icon: Icons.home,
                           title: 'Home',
+                          
                         ),
                         ExpansionTile(
                           title: Text(
@@ -198,19 +204,24 @@ class _SideBarState extends State<SideBar>
                   ),
                 ),
                 Align(
-                  alignment: Alignment(0, -0.9),
+                  alignment: Alignment(0, -0.7),
+                  
                   child: GestureDetector(
+                    
                     onTap: () {
                       onIconPressed();
                     },
                     child: ClipPath(
+                      
                       clipper: CustomItem(),
                       child: Container(
+                        
                           width: 35,
                           height: 110,
                           color: Colors.indigo.shade300,
                           alignment: Alignment.centerLeft,
                           child: AnimatedIcon(
+                            
                             progress: _animationController.view,
                             icon: AnimatedIcons.menu_close,
                             color: Color(0xFF1BB5FD),
@@ -221,6 +232,9 @@ class _SideBarState extends State<SideBar>
                 ),
               ],
             ),
+
+            ),
+            
           );
         },
       );

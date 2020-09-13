@@ -35,7 +35,7 @@ class _F2State extends State<F2> {
                   padding: EdgeInsets.only(left: 80, right: 10),
                   height: 180,
                   decoration: BoxDecoration(
-                    color: Colors.blue.shade300,
+                    color: Colors.indigo.shade300,
                   ),
                   child: Center(
                     child: Text(

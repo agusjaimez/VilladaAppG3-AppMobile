@@ -35,7 +35,7 @@ class _F3State extends State<F3> {
                   padding: EdgeInsets.only(left: 80, right: 10),
                   height: 180,
                   decoration: BoxDecoration(
-                    color: Colors.blue.shade300,
+                    color: Colors.indigo.shade300,
                   ),
                   child: Center(
                     child: Text(

@@ -82,7 +82,7 @@ class _SignInState extends State<SignIn> {
                     MaterialButton(
                         height: 45,
                         child: const Text(
-                          'Iniciar',
+                          'Iniciar Sesión',
                           style: TextStyle(fontSize: 25),
                           
                         ),
