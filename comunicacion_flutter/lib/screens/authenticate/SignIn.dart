@@ -78,11 +78,13 @@ class _SignInState extends State<SignIn> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 45),
                     MaterialButton(
+                        height: 45,
                         child: const Text(
-                          'Bienvenido',
+                          'Iniciar',
                           style: TextStyle(fontSize: 25),
+                          
                         ),
                         color: Colors.white,
                         elevation: 6,
