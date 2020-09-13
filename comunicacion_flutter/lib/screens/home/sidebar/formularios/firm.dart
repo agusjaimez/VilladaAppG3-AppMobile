@@ -1,13 +1,14 @@
-
 import 'dart:typed_data';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:ui' as ui;
 import 'package:image_picker_saver/image_picker_saver.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:toast/toast.dart';
-
-
+import 'package:flutter/services.dart';
+import 'dart:io';
+import 'package:bitmap/bitmap.dart';
 
 
 class Firm extends StatefulWidget{
@@ -22,19 +23,16 @@ class _HomePageState extends State<Firm> {
   @override
   Widget build(BuildContext context) {
     
-    return new Scaffold(
-
-      extendBodyBehindAppBar: true,
-      appBar: new AppBar(
+    return RepaintBoundary(
+        key: screen,
+        child: new Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: new AppBar(
         centerTitle: true,
         title: new Center(child: new Text("Dibuje su firma", textAlign: TextAlign.center))
       ),
-      
- 
-   
-      body:RepaintBoundary(
-        key: screen,
-        child: Stack(
+    
+        body: Stack(
         
         children: <Widget>[
                   new GestureDetector(
@@ -70,24 +68,39 @@ class _HomePageState extends State<Firm> {
                         heroTag: null,
                         child: 
                         new Icon(Icons.check),
-                        onPressed: () => saveSignature(),
+                        onPressed: saveSignature,
                       ),
                     ),
                   ],
         ) ,
         )
+    );
+    
       
        
-    );
+  
     
   }
   saveSignature() async {
     
     RenderRepaintBoundary boundary = screen.currentContext.findRenderObject();
+
+    if (boundary.debugNeedsPaint) {
+      print("Waiting for boundary to be painted.");
+      await Future.delayed(const Duration(milliseconds: 20));
+      return saveSignature();
+    }
+    
+
     ui.Image image = await boundary.toImage();
+    final directory = (await getApplicationDocumentsDirectory()).path;
     ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    Uint8List pngBytes = byteData.buffer.asUint8List();
-    print(pngBytes); // La variable pngBytes, tiene los bytes que conforman la imagen de la firma del padre en forma de array...La idea es pasar el array con la api y despues transformarlo a png(No es dificil!). 
+    Uint8List pngBytes = byteData.buffer.asUint8List();// La variable pngBytes, tiene los valores que conforman la imagen de la firma del padre en forma de array...La idea es pasar el array con la api y despues transformarlo a png(No es dificil!). 
+    //final path = '$directory/screenshot.png';
+    //File imgFile =new File(path);
+    //imgFile.writeAsBytes(pngBytes);
+    //var filePath = await ImagePickerSaver.saveFile( fileData:byteData.buffer.asUint8List());
+  
     
   }
   
