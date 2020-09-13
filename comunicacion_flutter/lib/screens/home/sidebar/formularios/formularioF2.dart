@@ -108,12 +108,12 @@ class _F2State extends State<F2> {
                                     Icon(
                                       Icons.date_range,
                                       size: 18.0,
-                                      color: Colors.blue,
+                                      color: Colors.black,
                                     ),
                                     Text(
                                       " $_hora",
                                       style: TextStyle(
-                                          color: Colors.blue,
+                                          color: Colors.black,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18.0),
                                     ),
@@ -134,11 +134,11 @@ class _F2State extends State<F2> {
                         clipBehavior: Clip.antiAlias,
                         child: MaterialButton(
                           minWidth: 200.0,
-                          height: 45,
+                          height: 50,
                           child: Text('Continuar',
                               style: TextStyle(
                                   fontSize: 16.0, color: Colors.white)),
-                          color: Color(0xFF00838F),
+                          color: Colors.indigo.shade300,
                           onPressed: () {
                             if (!_formKey.currentState.validate()) {
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));

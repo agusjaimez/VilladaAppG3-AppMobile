@@ -29,7 +29,8 @@ class _HomePageState extends State<Firm> {
         extendBodyBehindAppBar: true,
         appBar: new AppBar(
         centerTitle: true,
-        title: new Center(child: new Text("Dibuje su firma", textAlign: TextAlign.center))
+        title: new Center(child: new Text("Dibuje su firma", textAlign: TextAlign.center)),
+        backgroundColor: Colors.indigo.shade300,
       ),
     
         body: Stack(
@@ -58,6 +59,7 @@ class _HomePageState extends State<Firm> {
                         elevation: 10,
                         heroTag: null,
                         child: new Icon(Icons.refresh),
+                        backgroundColor: Colors.indigo.shade300,
                         onPressed: () => _points.clear(),
                       ),
                     ),
@@ -68,6 +70,7 @@ class _HomePageState extends State<Firm> {
                         heroTag: null,
                         child: 
                         new Icon(Icons.check),
+                        backgroundColor: Colors.indigo.shade300,
                         onPressed: saveSignature,
                       ),
                     ),
