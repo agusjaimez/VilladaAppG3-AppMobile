@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:comunicacion/block_navigation_block/navigation_block.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:comunicacion/screens/home/sidebar/formularios/firm.dart';
 
 class F2 extends StatefulWidget with NavigationStates {
   @override
@@ -125,14 +126,14 @@ class _F2State extends State<F2> {
                         clipBehavior: Clip.antiAlias,
                         child: MaterialButton(
                           minWidth: 200.0,
-                          height: 35,
-                          child: Text('Enviar',
+                          height: 45,
+                          child: Text('Continuar',
                               style: TextStyle(
                                   fontSize: 16.0, color: Colors.white)),
                           color: Color(0xFF00838F),
                           onPressed: () {
                             if (!_formKey.currentState.validate()) {
-                              return;
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));
                             }
                             _formKey.currentState.save();
                           },

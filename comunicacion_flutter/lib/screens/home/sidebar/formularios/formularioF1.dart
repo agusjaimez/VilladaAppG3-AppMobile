@@ -1,3 +1,4 @@
+import 'package:comunicacion/screens/home/sidebar/formularios/firm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:comunicacion/block_navigation_block/navigation_block.dart';
@@ -152,16 +153,16 @@ class _F1State extends State<F1> {
                         clipBehavior: Clip.antiAlias,
                         child: MaterialButton(
                           minWidth: 200.0,
-                          height: 35,
-                          child: Text('Enviar',
+                          height: 45,
+                          child: Text('Continuar',
                               style: TextStyle(
                                   fontSize: 16.0, color: Colors.white)),
                           color: Color(0xFF00838F),
                           onPressed: () {
                             if (!_formKey.currentState.validate()) {
-                              return;
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));
                             }
-                            _formKey.currentState.save();
+                            
                           },
                         )),
                     SizedBox(height: 50),

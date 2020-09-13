@@ -8,6 +8,9 @@ environment:
 
 
 dependencies:
+  image_picker_saver: ^0.3.0
+  toast: ^0.1.5
+
   flutter:
     sdk: flutter
   sqflite: any
