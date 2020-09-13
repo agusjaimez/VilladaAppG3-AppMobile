@@ -3,6 +3,7 @@ import 'package:comunicacion/screens/modelPost/posts.dart';
 import 'package:flutter/material.dart';
 // import 'package:comunicacion/utils/Slide.dart';
 // import 'package:bouncing_widget/bouncing_widget.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 
 
@@ -24,11 +25,17 @@ class _PrincipalState extends State<Principal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
+      appBar: AppBar(
         centerTitle: true,
         title: new Center(child: new Text("Comunicados", textAlign: TextAlign.center)),
         backgroundColor: Colors.indigo.shade300,
-      ),
+       ),
+        /*GradientAppBar(
+        centerTitle: true,
+        title: new Center(child: new Text("Comunicados", textAlign: TextAlign.center)),
+        backgroundColorStart: Colors.indigo.shade300,
+        backgroundColorEnd: Colors.blue.shade600,
+  ),*/
       body: Container(
         child: SafeArea(
         child: Container(

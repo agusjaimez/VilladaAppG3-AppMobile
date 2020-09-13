@@ -35,7 +35,16 @@ class _F1State extends State<F1> {
                   padding: EdgeInsets.only(left: 80, right: 10),
                   height: 180,
                   decoration: BoxDecoration(
-                    color: Colors.indigo.shade300,
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      
+                    colors: [
+                      Colors.indigo.shade700,
+                      Colors.indigo.shade300,
+                      
+                    ]),
+                    
                   ),
                   child: Center(
                     child: Text('Formulario F1: Justificar faltas del Alumno',
