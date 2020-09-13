@@ -38,7 +38,7 @@ class _PostsState extends State<Posts> {
           return RefreshIndicator(
             onRefresh: posts.refresh,
             child: ListView.separated(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
+              //padding: EdgeInsets.symmetric(vertical: 10.0),
               controller: scrollController,
               separatorBuilder: (context, index) => Divider(),
               itemCount: _snapshot.data.length + 1,
