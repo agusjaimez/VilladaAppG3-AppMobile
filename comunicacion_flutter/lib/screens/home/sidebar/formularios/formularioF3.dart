@@ -163,7 +163,7 @@ class _F3State extends State<F3> {
                                   fontSize: 16.0, color: Colors.white)),
                           color: Colors.indigo.shade300,
                           onPressed: () {
-                            if (!_formKey.currentState.validate()) {
+                            if (_formKey.currentState.validate()) {
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));
                             }
                             _formKey.currentState.save();

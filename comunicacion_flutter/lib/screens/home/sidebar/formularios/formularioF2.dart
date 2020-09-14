@@ -140,7 +140,7 @@ class _F2State extends State<F2> {
                                   fontSize: 16.0, color: Colors.white)),
                           color: Colors.indigo.shade300,
                           onPressed: () {
-                            if (!_formKey.currentState.validate()) {
+                            if (_formKey.currentState.validate()) {
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));
                             }
                             _formKey.currentState.save();
