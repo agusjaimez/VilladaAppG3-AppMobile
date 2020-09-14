@@ -168,7 +168,7 @@ class _F1State extends State<F1> {
                                   fontSize: 16.0, color: Colors.white)),
                           color: Colors.indigo.shade300,
                           onPressed: () {
-                            if (!_formKey.currentState.validate()) {
+                            if (_formKey.currentState.validate()) {
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));
                             }
                             

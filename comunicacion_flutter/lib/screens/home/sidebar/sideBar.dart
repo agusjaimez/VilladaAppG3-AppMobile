@@ -18,7 +18,7 @@ class _SideBarState extends State<SideBar>
   Stream<bool> isSideBarOpenStream;
   StreamSink<bool> isSideBarOpenSink;
 
-  final _animationDuration = const Duration(milliseconds: 100);
+  final _animationDuration = const Duration(milliseconds: 500);
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseUser user;
 
@@ -77,6 +77,7 @@ class _SideBarState extends State<SideBar>
               
             child: Row(
               
+              
               children: <Widget>[
                 Expanded(
                   child: Container(
@@ -124,16 +125,24 @@ class _SideBarState extends State<SideBar>
                           indent: 32,
                           endIndent: 32,
                         ),
-                        ItemSideBar(
-                          onTap: () {
-                            onIconPressed();
+                        new ListTile(
+                        leading: Icon(Icons.home, color: Colors.blue.shade800),
+                        title: new Text('Home',
+                                        style: TextStyle(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 20,
+                                        color: Colors.white
+                                        ),
+                                        ),
+                        
+                        onTap: () {
+                          onIconPressed();
                             BlocProvider.of<NavigationBloc>(context)
                                 .add(NavigationEvents.PrincipalPageEvent);
-                          },
-                          icon: Icons.home,
-                          title: 'Home',
-                          
+                        },
                         ),
+
+                       
                         ExpansionTile(
                           title: Text(
                             'Formularios',
@@ -143,43 +152,66 @@ class _SideBarState extends State<SideBar>
                                 color: Colors.white),
                           ),
                           children: <Widget>[
-                            ItemSideBar(
-                              onTap: () {
-                                onIconPressed();
-                                BlocProvider.of<NavigationBloc>(context)
-                                    .add(NavigationEvents.FormularioF1Event);
-                              },
-                              icon: Icons.assignment,
-                              title: 'Justificar Faltas (F1)',
-                            ),
-                            ItemSideBar(
-                              onTap: () {
-                                onIconPressed();
-                                BlocProvider.of<NavigationBloc>(context)
-                                    .add(NavigationEvents.FormularioF2Event);
-                              },
-                              icon: Icons.assignment,
-                              title: 'Retiro imprevisto (F2)',
-                            ),
-                            ItemSideBar(
-                              onTap: () {
-                                onIconPressed();
-                                BlocProvider.of<NavigationBloc>(context)
-                                    .add(NavigationEvents.FormularioF3Event);
-                              },
-                              icon: Icons.assignment,
-                              title: 'Retiro Anticipado (F3)',
-                            ),
-                          ],
-                        ),
-                        ItemSideBar(
-                          onTap: () {
-                            onIconPressed();
+                            
+                            new ListTile(
+                        leading: Icon(Icons.assignment, color: Colors.blue.shade800),
+                        title: new Text('Justificar Faltas (F1)',
+                                        style: TextStyle(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 20,
+                                        color: Colors.white
+                                        ),
+                                        ),
+                        
+                        onTap: () {
+                          onIconPressed();
                             BlocProvider.of<NavigationBloc>(context)
-                                .add(NavigationEvents.FormularioF3Event);
+                                    .add(NavigationEvents.FormularioF1Event);
+                        },
+                        ),
+                        new ListTile(
+                        leading: Icon(Icons.assignment, color: Colors.blue.shade800),
+                        title: new Text('Retiro imprevisto (F2)',
+                                        style: TextStyle(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 20,
+                                        color: Colors.white
+                                        ),
+                                        ),
+                        
+                        onTap: () {
+                          onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                    .add(NavigationEvents.FormularioF2Event);
+                        },
+                        ),
+                        new ListTile(
+                        leading: Icon(Icons.assignment, color: Colors.blue.shade800),
+                        title: new Text('Retiro Anticipado (F3)',
+                                        style: TextStyle(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 20,
+                                        color: Colors.white
+                                        ),
+                                        ),
+                        
+                        onTap: () {
+                          onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                    .add(NavigationEvents.FormularioF3Event);
+                        },
+                        ),
+                        ],
+                        ),
+                        
+                        ItemSideBar(
+                          
+                          onTap: () {
+                            
                           },
                           icon: Icons.face,
                           title: 'Informacion Alumno',
+                          
                         ),
                         Expanded(
                           child: Align(
