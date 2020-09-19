@@ -66,7 +66,7 @@ class _SideBarState extends State<SideBar>
         stream: isSideBarOpenStream,
         builder: (context, isSideBarOpenedAsync) {
           return AnimatedPositioned(
-          
+            
             duration: _animationDuration,
             top: 0,
             bottom: 0,
@@ -79,8 +79,11 @@ class _SideBarState extends State<SideBar>
               
               
               children: <Widget>[
+                
                 Expanded(
+                  
                   child: Container(
+                    
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -256,7 +259,7 @@ class _SideBarState extends State<SideBar>
                             
                             progress: _animationController.view,
                             icon: AnimatedIcons.menu_close,
-                            color: Color(0xFF1BB5FD),
+                            color: Colors.indigo.shade600,
                             size: 25,
                           )),
                     ),
