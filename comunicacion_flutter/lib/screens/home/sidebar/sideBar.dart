@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
+
+
+
 class SideBar extends StatefulWidget {
   @override
   _SideBarState createState() => _SideBarState();
@@ -210,6 +213,9 @@ class _SideBarState extends State<SideBar>
                         ItemSideBar(
                           
                           onTap: () {
+                            onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                    .add(NavigationEvents.AlumnoSelectEvent);
                             
                           },
                           icon: Icons.face,
