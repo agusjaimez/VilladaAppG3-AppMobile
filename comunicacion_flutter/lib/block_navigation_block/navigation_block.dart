@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:comunicacion/screens/home/principal.dart';
+import 'package:comunicacion/screens/home/sidebar/alumno.dart';
 import 'package:comunicacion/screens/home/sidebar/formularios/formularioF1.dart';
 import 'package:comunicacion/screens/home/sidebar/formularios/formularioF2.dart';
 import 'package:comunicacion/screens/home/sidebar/formularios/formularioF3.dart';
 import 'package:comunicacion/screens/home/sidebar/alumno_select.dart';
-import 'package:comunicacion/screens/home/sidebar/alumno.dart';
 
 
 

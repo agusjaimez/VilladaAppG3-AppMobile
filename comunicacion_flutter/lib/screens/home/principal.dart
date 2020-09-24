@@ -39,7 +39,7 @@ class _PrincipalState extends State<Principal> {
       body: Container(
         child: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40), child: Posts()),
+          padding: EdgeInsets.symmetric(), child: Posts()),
         )
           ),
           
