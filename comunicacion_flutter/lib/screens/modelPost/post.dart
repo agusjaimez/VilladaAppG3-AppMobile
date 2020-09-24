@@ -5,8 +5,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 
-
-
 class Post extends StatelessWidget {
   
   final PostModel post;
