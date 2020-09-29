@@ -8,9 +8,10 @@ import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:comunicacion/screens/home/principal_data.dart';
-
+import 'package:comunicacion/screens/home/form_notifications.dart';
 
 class Principal extends StatefulWidget with NavigationStates {
+
   @override
   _PrincipalState createState() => _PrincipalState();
 }
@@ -21,7 +22,7 @@ class _PrincipalState extends State<Principal> {
   List<PrincipalData> _datas = List<PrincipalData>();
 
   Future<List<PrincipalData>> fetchPrincipalDatas() async {
-    var url = 'https://jsonplaceholder.typicode.com/posts';
+    var url = 'https://jsonplaceholder.typicode.com/comments';
     var response = await http.get(url);
 
     var datas = List<PrincipalData>();
@@ -51,20 +52,34 @@ class _PrincipalState extends State<Principal> {
 
       body: ListView.builder(
         itemBuilder: (context, index){
-          var right = TextAlign.right;
           return Card(
               child: ListTile(
                    title:SizedBox(
+                     height: 60,
                       width: double.infinity,
                       child: Align(
-                        alignment: Alignment(-0.5, 0),
-                        child: Text(_datas[index].title, textAlign: TextAlign.left),
+                        alignment: Alignment.centerLeft,
+                        child: Text(_datas[index].title),
                       ),
                        
                     ), 
-                  trailing: IconButton(   
+                  leading: SizedBox(width:5),
+                   trailing: IconButton(   
                       icon: Icon(Icons.arrow_right),
                       ),
+
+                      onTap: () {
+              Navigator.push(context, PageRouteBuilder(pageBuilder:
+                  (BuildContext context, Animation<double> animation,
+                      Animation<double> secAnimaiton) {
+                return FormNotification();
+              }
+              )
+              );
+            },
+
+    
+
               )
               
           
