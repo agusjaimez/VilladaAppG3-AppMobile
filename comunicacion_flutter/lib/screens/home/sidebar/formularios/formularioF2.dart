@@ -36,14 +36,12 @@ class _F2State extends State<F2> {
                   height: 180,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      
-                    colors: [
-                      Colors.indigo.shade700,
-                      Colors.indigo.shade300,
-                      
-                    ]),
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          Colors.indigo.shade700,
+                          Colors.indigo.shade300,
+                        ]),
                   ),
                   child: Center(
                     child: Text(
@@ -140,8 +138,11 @@ class _F2State extends State<F2> {
                                   fontSize: 16.0, color: Colors.white)),
                           color: Colors.indigo.shade300,
                           onPressed: () {
-                            if (!_formKey.currentState.validate()) {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));
+                            if (_formKey.currentState.validate()) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Firm()));
                             }
                             _formKey.currentState.save();
                           },
