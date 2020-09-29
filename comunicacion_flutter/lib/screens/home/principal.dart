@@ -58,7 +58,7 @@ class _PrincipalState extends State<Principal> {
                      height: 60,
                       width: double.infinity,
                       child: Align(
-                        alignment: Alignment(-0.5, 0),
+                        alignment: Alignment.centerLeft,
                         child: Text(_datas[index].title),
                       ),
                        
