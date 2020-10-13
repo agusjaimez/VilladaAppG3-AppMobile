@@ -19,6 +19,10 @@ class _F1State extends State<F1> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  static DateTime now = new DateTime.now();
+
+  var newDate = new DateTime(now.year, now.month, now.day - 2);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,15 +40,12 @@ class _F1State extends State<F1> {
                   height: 180,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      
-                    colors: [
-                      Colors.indigo.shade700,
-                      Colors.indigo.shade300,
-                      
-                    ]),
-                    
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          Colors.indigo.shade700,
+                          Colors.indigo.shade300,
+                        ]),
                   ),
                   child: Center(
                     child: Text('Formulario F1: Justificar faltas del Alumno',
@@ -114,9 +115,8 @@ class _F1State extends State<F1> {
                                 containerHeight: 210.0,
                               ),
                               showTitleActions: true,
-                              minTime: DateTime(2020, 1, 1),
-                              maxTime: DateTime(2020, 12, 31),
-                              onConfirm: (date) {
+                              minTime: newDate,
+                              maxTime: DateTime.now(), onConfirm: (date) {
                             print('confirm $date');
                             _date = 'M ${date.month}  - D ${date.day}';
                             setState(() {});
@@ -168,10 +168,12 @@ class _F1State extends State<F1> {
                                   fontSize: 16.0, color: Colors.white)),
                           color: Colors.indigo.shade300,
                           onPressed: () {
-                            if (!_formKey.currentState.validate()) {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));
+                            if (_formKey.currentState.validate()) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Firm()));
                             }
-                            
                           },
                         )),
                     SizedBox(height: 50),

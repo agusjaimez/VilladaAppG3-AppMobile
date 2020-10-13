@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:comunicacion/block_navigation_block/navigation_block.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:comunicacion/screens/home/sidebar/formularios/firm.dart';
 
 class F2 extends StatefulWidget with NavigationStates {
   @override
@@ -14,8 +13,6 @@ class _F2State extends State<F2> {
   String _hora = "Seleccione Hora";
   // ignore: unused_field
   String _nombre;
-  // ignore: unused_field
-  String _justificacion;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -36,14 +33,12 @@ class _F2State extends State<F2> {
                   height: 180,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      
-                    colors: [
-                      Colors.indigo.shade700,
-                      Colors.indigo.shade300,
-                      
-                    ]),
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          Colors.indigo.shade700,
+                          Colors.indigo.shade300,
+                        ]),
                   ),
                   child: Center(
                     child: Text(
@@ -140,9 +135,6 @@ class _F2State extends State<F2> {
                                   fontSize: 16.0, color: Colors.white)),
                           color: Colors.indigo.shade300,
                           onPressed: () {
-                            if (!_formKey.currentState.validate()) {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));
-                            }
                             _formKey.currentState.save();
                           },
                         )),
