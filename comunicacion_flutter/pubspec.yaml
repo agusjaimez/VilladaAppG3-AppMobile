@@ -16,6 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  http: ^0.12.2
   sqflite: any
   path_provider: any
     
@@ -40,7 +41,6 @@ dependencies:
   analyzer: ^0.39.0
   json_annotation: ^3.0.1
 
-  http: ^0.12.2
   
 
 dev_dependencies:

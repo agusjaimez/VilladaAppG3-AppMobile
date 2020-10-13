@@ -1,5 +1,10 @@
 import 'package:comunicacion/utils/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:convert' show utf8;
+import 'package:path/path.dart';
+import 'package:async/async.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class Auth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -51,4 +56,26 @@ class Auth {
       return null;
     }
   }
+}
+
+// ignore: non_constant_identifier_names
+Upload(uploadURL, File imageFile) async {
+  var stream =
+      // ignore: deprecated_member_use
+      new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+  var length = await imageFile.length();
+
+  var uri = Uri.parse(uploadURL);
+
+  var request = new http.MultipartRequest("POST", uri);
+  var multipartFile = new http.MultipartFile('file', stream, length,
+      filename: basename(imageFile.path));
+  //contentType: new MediaType('image', 'png'));
+
+  request.files.add(multipartFile);
+  var response = await request.send();
+  print(response.statusCode);
+  response.stream.transform(utf8.decoder).listen((value) {
+    print(value);
+  });
 }

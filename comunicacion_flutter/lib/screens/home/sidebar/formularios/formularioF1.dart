@@ -19,6 +19,10 @@ class _F1State extends State<F1> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  static DateTime now = new DateTime.now();
+
+  var newDate = new DateTime(now.year, now.month, now.day - 2);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,9 +115,8 @@ class _F1State extends State<F1> {
                                 containerHeight: 210.0,
                               ),
                               showTitleActions: true,
-                              minTime: DateTime(2020, 1, 1),
-                              maxTime: DateTime(2020, 12, 31),
-                              onConfirm: (date) {
+                              minTime: newDate,
+                              maxTime: DateTime.now(), onConfirm: (date) {
                             print('confirm $date');
                             _date = 'M ${date.month}  - D ${date.day}';
                             setState(() {});
