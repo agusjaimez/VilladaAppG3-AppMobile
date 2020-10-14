@@ -3,6 +3,15 @@ import 'package:http/http.dart';
 import 'package:flutter/material.dart';
 
 class FormNotification extends StatelessWidget {
+
+
+  final  Map data;
+
+ 
+ FormNotification(this.data);
+
+ 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +42,7 @@ class FormNotification extends StatelessWidget {
                         SizedBox(
                           width: double.infinity,
                           child: Text(
-                            "Titulo",
+                            data['titulo'],
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontStyle: FontStyle.italic,
@@ -45,7 +54,7 @@ class FormNotification extends StatelessWidget {
                         SizedBox(
                           width: double.infinity,
                           child: Text(
-                            "(20/9/2020)",
+                            data['fecha'],
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 20.0,
@@ -57,8 +66,9 @@ class FormNotification extends StatelessWidget {
                         SizedBox(
                           height: 50.0,
                         ),
-                        Text(
-                          'Lorem ipsum dolor sit sit amet, consectetur adipiscing elit, sed dosit amet, consectetur adipiscing elit, sed dosit amet, consectetur adipiscing elit, sed dosit amet, consectetur adipiscing elit, sed dosit amet, consectetur adipiscing elit, sed dosit amet, consectetur adipiscing elit, sed doamet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                        Text(data['directivo'].toString()),
+                        Text(data['curso'].toString()),
+                        Text(data['mensaje'],
                           style: TextStyle(
                             fontSize: 22.0,
                             fontStyle: FontStyle.italic,

@@ -68,7 +68,8 @@ class _PrincipalState extends State<Principal> {
                     Navigator.push(context, PageRouteBuilder(pageBuilder:
                         (BuildContext context, Animation<double> animation,
                             Animation<double> secAnimaiton) {
-                      return FormNotification();
+                             
+                      return FormNotification(snapshot.data[index]);
                     }));
                   },
                 ));

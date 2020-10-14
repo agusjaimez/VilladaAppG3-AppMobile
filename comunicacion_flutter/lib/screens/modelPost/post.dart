@@ -29,7 +29,7 @@ class Post extends StatelessWidget {
         Navigator.push(context, PageRouteBuilder(pageBuilder:
             (BuildContext context, Animation<double> animation,
                 Animation<double> secAnimaiton) {
-          return FormNotification();
+          return Text('Aca estaba FormNotification()');
         }));
       },
     );
