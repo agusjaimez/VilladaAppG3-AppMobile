@@ -127,8 +127,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0-nullsafety"
-<<<<<<< HEAD
-=======
   checked_yaml:
     dependency: transitive
     description:
@@ -143,7 +141,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
->>>>>>> estetica
   clock:
     dependency: transitive
     description:
@@ -151,16 +148,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0-nullsafety"
-<<<<<<< HEAD
-=======
   code_builder:
     dependency: transitive
     description:
       name: code_builder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.4.1"
->>>>>>> estetica
+    version: "3.5.0"
   collection:
     dependency: transitive
     description:
@@ -210,8 +204,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0-nullsafety"
-<<<<<<< HEAD
-=======
   ffi:
     dependency: transitive
     description:
@@ -219,7 +211,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.3"
->>>>>>> estetica
   file:
     dependency: transitive
     description:
@@ -301,7 +292,7 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.5"
+    version: "6.0.6"
   flutter_datetime_picker:
     dependency: "direct main"
     description:
@@ -315,7 +306,7 @@ packages:
       name: flutter_launcher_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.0"
+    version: "0.8.1"
   flutter_spinkit:
     dependency: "direct main"
     description:
@@ -360,7 +351,7 @@ packages:
       name: html
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.0+3"
+    version: "0.14.0+4"
   http:
     dependency: "direct main"
     description:
@@ -395,7 +386,7 @@ packages:
       name: image_gallery_saver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   image_picker_saver:
     dependency: "direct main"
     description:
@@ -466,8 +457,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0-nullsafety.2"
-<<<<<<< HEAD
-=======
   mime:
     dependency: transitive
     description:
@@ -475,7 +464,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.7"
->>>>>>> estetica
   nested:
     dependency: transitive
     description:
@@ -573,7 +561,7 @@ packages:
       name: plugin_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.3"
   pool:
     dependency: transitive
     description:
@@ -684,8 +672,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0-nullsafety"
-<<<<<<< HEAD
-=======
   stream_transform:
     dependency: transitive
     description:
@@ -693,7 +679,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
->>>>>>> estetica
   string_scanner:
     dependency: transitive
     description:
@@ -722,8 +707,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.19-nullsafety"
-<<<<<<< HEAD
-=======
   timing:
     dependency: transitive
     description:
@@ -731,7 +714,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1+2"
->>>>>>> estetica
   toast:
     dependency: "direct main"
     description:
@@ -753,8 +735,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0-nullsafety.2"
-<<<<<<< HEAD
-=======
   watcher:
     dependency: transitive
     description:
@@ -776,7 +756,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.3"
->>>>>>> estetica
   xdg_directories:
     dependency: transitive
     description:
