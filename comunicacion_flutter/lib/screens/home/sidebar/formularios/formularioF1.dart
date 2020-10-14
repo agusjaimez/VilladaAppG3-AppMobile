@@ -16,12 +16,20 @@ class _F1State extends State<F1> {
   String _nombre;
   // ignore: unused_field
   String _justificacion;
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  DateTime fecha() {
+    var hoy = DateTime.now();
+    var martes = 2;
+    if (hoy.weekday <= martes) {
+      hoy = DateTime(hoy.year, hoy.month, hoy.day - 2);
+    }
+    if (hoy.weekday > martes) {
+      hoy = DateTime(hoy.year, hoy.month, hoy.day - 2);
+    }
+    return hoy;
+  }
 
-  static DateTime now = new DateTime.now();
-
-  var newDate = new DateTime(now.year, now.month, now.day - 2);
+  static DateTime now = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +123,8 @@ class _F1State extends State<F1> {
                                 containerHeight: 210.0,
                               ),
                               showTitleActions: true,
-                              minTime: newDate,
-                              maxTime: DateTime.now(), onConfirm: (date) {
+                              minTime: fecha(),
+                              maxTime: now, onConfirm: (date) {
                             print('confirm $date');
                             _date = 'M ${date.month}  - D ${date.day}';
                             setState(() {});
