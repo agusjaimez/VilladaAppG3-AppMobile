@@ -58,8 +58,10 @@ class Auth {
   }
 }
 
+// ignore: non_constant_identifier_names
 Upload(uploadURL, File imageFile) async {
   var stream =
+      // ignore: deprecated_member_use
       new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
   var length = await imageFile.length();
 

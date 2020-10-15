@@ -16,8 +16,20 @@ class _F1State extends State<F1> {
   String _nombre;
   // ignore: unused_field
   String _justificacion;
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  DateTime fecha() {
+    var hoy = DateTime.now();
+    var martes = 2;
+    if (hoy.weekday <= martes) {
+      hoy = DateTime(hoy.year, hoy.month, hoy.day - 2);
+    }
+    if (hoy.weekday > martes) {
+      hoy = DateTime(hoy.year, hoy.month, hoy.day - 2);
+    }
+    return hoy;
+  }
+
+  static DateTime now = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +50,12 @@ class _F1State extends State<F1> {
                   height: 180,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      
-                    colors: [
-                      Colors.indigo.shade700,
-                      Colors.indigo.shade300,
-                      
-                    ]),
-                    
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          Colors.indigo.shade700,
+                          Colors.indigo.shade300,
+                        ]),
                   ),
                   child: Center(
                     child: Text('Formulario F1: Justificar faltas del Alumno',
@@ -116,9 +125,8 @@ class _F1State extends State<F1> {
                                 containerHeight: 210.0,
                               ),
                               showTitleActions: true,
-                              minTime: DateTime(2020, 1, 1),
-                              maxTime: DateTime(2020, 12, 31),
-                              onConfirm: (date) {
+                              minTime: fecha(),
+                              maxTime: now, onConfirm: (date) {
                             print('confirm $date');
                             _date = 'M ${date.month}  - D ${date.day}';
                             setState(() {});
@@ -171,9 +179,11 @@ class _F1State extends State<F1> {
                           color: Colors.indigo.shade300,
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Firm()));
                             }
-                            
                           },
                         )),
                     SizedBox(height: 50),
