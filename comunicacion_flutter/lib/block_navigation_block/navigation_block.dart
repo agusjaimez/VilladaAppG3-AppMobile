@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:comunicacion/screens/home/principal.dart';
-import 'package:comunicacion/screens/home/sidebar/alumno.dart';
 import 'package:comunicacion/screens/home/sidebar/formularios/formularioF1.dart';
 import 'package:comunicacion/screens/home/sidebar/formularios/formularioF2.dart';
 import 'package:comunicacion/screens/home/sidebar/formularios/formularioF3.dart';
@@ -14,7 +13,7 @@ enum NavigationEvents {
   FormularioF2Event,
   FormularioF3Event,
   AlumnoSelectEvent,
-  AlumnoEvent,
+
 }
 
 abstract class NavigationStates {}
@@ -40,9 +39,7 @@ class NavigationBloc extends Bloc<NavigationEvents, NavigationStates> {
       case NavigationEvents.AlumnoSelectEvent:
         yield AlumnoSelect();
         break;
-      case NavigationEvents.AlumnoEvent:
-        yield Alumno();
-        break;
+      
     }
   }
 }

@@ -1,43 +1,71 @@
-import 'package:flutter/cupertino.dart';
+
+import 'dart:html';
+
 import 'package:flutter/material.dart';
-import 'package:comunicacion/block_navigation_block/navigation_block.dart';
-import 'package:comunicacion/screens/modelPost/posts.dart';
 
 
+class Alumno extends StatelessWidget {
+ 
 
-class Alumno extends StatefulWidget with NavigationStates {
-  @override
-  _AlumnoState createState() => _AlumnoState();
-}
+  final Map data;
 
-class _AlumnoState extends State<Alumno> {
+  Alumno(this.data);
+
   @override
   Widget build(BuildContext context) {
-    
+
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
-        centerTitle: true,
-        title: new Center(child: new Text("Alumnos", textAlign: TextAlign.center)),
         backgroundColor: Colors.indigo.shade300,
-       ),
-        /*GradientAppBar(
-        centerTitle: true,
-        title: new Center(child: new Text("Comunicados", textAlign: TextAlign.center)),
-        backgroundColorStart: Colors.indigo.shade300,
-        backgroundColorEnd: Colors.blue.shade600,
-  ),*/
-      body: Container(
-        child: SafeArea(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40), child: Posts()
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                color: Colors.white,
+                child: Container(
+                    
+                    width: double.infinity,
+                    height: 200.0,
+                    child: ListView(
+                      
+                      children: <Widget>[
+                        
+                        SizedBox(
+                          height: 20,
+                        ),
+                        
+                        
+                        Text("Alumno: "+data['first_name']+" "+data['last_name'] .toString(), style: TextStyle(fontSize: 20, fontStyle: FontStyle.normal),),
+                        SizedBox( height: 10, ),
+                        Text("Curso: "+data['curso'].toString(), style: TextStyle(fontSize: 20, fontStyle: FontStyle.normal),),
+                        SizedBox( height: 10, ),
+                        Text("Dni: "+data['dni'].toString(), style: TextStyle(fontSize: 20, fontStyle: FontStyle.normal),),
+                        SizedBox( height: 10, ),
+                        Text("Tutor: "+data['tutor']["first_name"]+" "+data['tutor']["last_name"].toString(), style: TextStyle(fontSize: 20, fontStyle: FontStyle.normal,),),
+                        SizedBox(height: 30,),
+                       
+                        
+                        
+                      ],
+                    )),
+              )
+            ],
           ),
-        )
-          ),
-          
-          
-          
+        ),
+      ),
     );
 
 
   }
+  
 }
