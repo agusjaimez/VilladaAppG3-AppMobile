@@ -8,12 +8,13 @@ class FormNotification extends StatelessWidget {
   final  Map data;
 
  
- FormNotification(this.data);
+  FormNotification(this.data);
 
  
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
@@ -30,6 +31,7 @@ class FormNotification extends StatelessWidget {
             children: <Widget>[
               Container(
                 height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
                 color: Colors.white,
                 child: Container(
                     width: double.infinity,
@@ -45,30 +47,28 @@ class FormNotification extends StatelessWidget {
                             data['titulo'],
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontSize: 40.0,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 35.0,
                               color: Colors.black,
                             ),
                           ),
                         ),
                         SizedBox(
-                          width: double.infinity,
-                          child: Text(
-                            data['fecha'],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.black,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
+                          height: 20,
                         ),
+                        
                         SizedBox(
-                          height: 50.0,
+                          height: 20,
                         ),
-                        Text(data['directivo'].toString()),
-                        Text(data['curso'].toString()),
+                        Text("Directivo: "+data['directivo']['first_name']+" "+data['directivo']['last_name'] .toString(), style: TextStyle(fontSize: 17, fontStyle: FontStyle.italic),),
+                        SizedBox( height: 10, ),
+                        Text("Fecha: "+data['fecha'].toString(), style: TextStyle(fontSize: 17, fontStyle: FontStyle.italic),),
+                        SizedBox( height: 10, ),
+                        Text("Cursos: "+data['curso'].join(", ").toString(), style: TextStyle(fontSize: 17, fontStyle: FontStyle.italic,),),
+                        SizedBox(height: 30,),
+                       
                         Text(data['mensaje'],
+                        
                           style: TextStyle(
                             fontSize: 22.0,
                             fontStyle: FontStyle.italic,

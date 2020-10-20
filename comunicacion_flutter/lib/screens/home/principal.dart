@@ -7,44 +7,35 @@ import 'dart:convert';
 import 'package:comunicacion/screens/home/principal_data.dart';
 import 'package:comunicacion/screens/home/form_notifications.dart';
 import 'package:http/http.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'dart:async';
 
 class Principal extends StatefulWidget with NavigationStates {
   @override
   _PrincipalState createState() => _PrincipalState();
+
+  
 }
 
 class _PrincipalState extends State<Principal> {
-  bool enabled = false;
-
-  List<PrincipalData> _datas = List<PrincipalData>();
-
-  Future<List<PrincipalData>> fetchPrincipalDatas() async {
-    var url = 'https://jsonplaceholder.typicode.com/comments';
-    var response = await http.get(url);
-
-    var datas = List<PrincipalData>();
-
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body);
-      for (var title in data) {
-        datas.add(PrincipalData.fromJson(title));
-      }
-    }
-    return datas;
-  }
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        
         centerTitle: true,
         title: new Center(
+          
             child: new Text("Comunicados", textAlign: TextAlign.center)),
         backgroundColor: Colors.indigo.shade300,
       ),
-      body: StreamBuilder(
+       body: StreamBuilder(
+          
           stream: Stream.periodic(Duration(seconds: 5)).asyncMap(
-              (i) => getComunicados()), // i is null here (check periodic docs)
+            
+          (i) => getComunicados()), // i is null here (check periodic docs)
           builder: (context, snapshot) {
             return ListView.builder(
               itemCount: snapshot.data.length,
@@ -74,16 +65,19 @@ class _PrincipalState extends State<Principal> {
                   },
                 ));
               },
-            );
-          }), // builder should also handle the case when data is not fetched yet
+        );
+      }), 
     );
   }
 }
 
 Future getComunicados() async {
-  Response response =
-      await get('http://10.0.2.2:8000/app/apicomunicados/?format=json');
-  List list = jsonDecode(response.body);
+ 
+  List list;
+  Response response = await get('http://192.168.1.144:8000/app/apicomunicados/?format=json'); //cambiar direccion ip a la del dispositivo que se corre el  django server en la red local.(haciendo un manage.py runserver 0.0.0.0:8000)
+       list = jsonDecode(response.body);
+
 
   return list;
 }
+
