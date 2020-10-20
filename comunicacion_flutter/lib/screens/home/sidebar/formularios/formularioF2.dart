@@ -13,9 +13,7 @@ class F2 extends StatefulWidget with NavigationStates {
 class _F2State extends State<F2> {
   String _hora = "Seleccione Hora";
   // ignore: unused_field
-  String _nombre;
-  // ignore: unused_field
-  String _justificacion;
+  TextEditingController _nombre = new TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -38,12 +36,11 @@ class _F2State extends State<F2> {
                     gradient: LinearGradient(
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
-                      
-                    colors: [
-                      Colors.indigo.shade700,
-                      Colors.indigo.shade300,
-                      
-                    ]),
+                      /*colors: [
+                          Colors.indigo.shade700,
+                          Colors.indigo.shade300,
+                        ]*/
+                    ),
                   ),
                   child: Center(
                     child: Text(
@@ -64,6 +61,7 @@ class _F2State extends State<F2> {
                       elevation: 4.0,
                       shadowColor: Colors.black,
                       child: TextFormField(
+                        controller: _nombre,
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Nombre '),
                         // ignore: missing_return
@@ -72,9 +70,10 @@ class _F2State extends State<F2> {
                             return 'Ingrese un Nombre Adecuado';
                           }
                         },
+                        /*
                         onSaved: (String value) {
                           _nombre = value;
-                        },
+                        },*/
                         onChanged: (value) {
                           setState(() {});
                         },
@@ -140,9 +139,8 @@ class _F2State extends State<F2> {
                                   fontSize: 16.0, color: Colors.white)),
                           color: Colors.indigo.shade300,
                           onPressed: () {
-                            if (_formKey.currentState.validate()) {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));
-                            }
+                            postForm(_nombre.text, '', _hora,
+                                "http://127.0.0.1:8000/app/apiformulario2");
                             _formKey.currentState.save();
                           },
                         )),

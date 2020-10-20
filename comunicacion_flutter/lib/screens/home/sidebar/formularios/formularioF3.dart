@@ -13,9 +13,8 @@ class F3 extends StatefulWidget with NavigationStates {
 class _F3State extends State<F3> {
   String _hora = "Seleccione Hora";
   // ignore: unused_field
-  String _nombre;
-  // ignore: unused_field
-  String _justificacion;
+  TextEditingController _nombre = new TextEditingController();
+  TextEditingController _justificacion = new TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -38,12 +37,11 @@ class _F3State extends State<F3> {
                     gradient: LinearGradient(
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
-                      
-                    colors: [
-                      Colors.indigo.shade700,
-                      Colors.indigo.shade300,
-                      
-                    ]),
+                      /*colors: [
+                          Colors.indigo.shade700,
+                          Colors.indigo.shade300,
+                        ]*/
+                    ),
                   ),
                   child: Center(
                     child: Text(
@@ -64,6 +62,7 @@ class _F3State extends State<F3> {
                       elevation: 4.0,
                       shadowColor: Colors.black,
                       child: TextFormField(
+                        controller: _nombre,
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Nombre '),
                         // ignore: missing_return
@@ -72,9 +71,10 @@ class _F3State extends State<F3> {
                             return 'Ingrese un Nombre Adecuado';
                           }
                         },
+                        /*
                         onSaved: (String value) {
                           _nombre = value;
-                        },
+                        },*/
                         onChanged: (value) {
                           setState(() {});
                         },
@@ -130,6 +130,7 @@ class _F3State extends State<F3> {
                       elevation: 4.0,
                       shadowColor: Colors.black,
                       child: TextFormField(
+                        controller: _justificacion,
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         decoration: textInputDecoration.copyWith(
@@ -140,9 +141,10 @@ class _F3State extends State<F3> {
                             return 'Ingrese un Nombre Adecuado';
                           }
                         },
+                        /*
                         onSaved: (String value) {
                           _justificacion = value;
-                        },
+                        },*/
                         onChanged: (value) {
                           setState(() {});
                         },
@@ -164,7 +166,12 @@ class _F3State extends State<F3> {
                           color: Colors.indigo.shade300,
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));
+                              postForm(_nombre.text, _justificacion.text, _hora,
+                                  "http://127.0.0.1:8000/app/apiformulario3");
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Firm()));
                             }
                             _formKey.currentState.save();
                           },

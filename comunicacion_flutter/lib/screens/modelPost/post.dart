@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:comunicacion/screens/modelPost/models_example.dart';
 import 'package:comunicacion/screens/home/form_notifications.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class Post extends StatelessWidget {
   final PostModel post;
@@ -25,13 +23,13 @@ class Post extends StatelessWidget {
       ),
       trailing: IconButton(
         icon: Icon(Icons.arrow_right),
-        onPressed: () {},
+        onPressed: null,
       ),
       onTap: () {
         Navigator.push(context, PageRouteBuilder(pageBuilder:
             (BuildContext context, Animation<double> animation,
                 Animation<double> secAnimaiton) {
-          return FormNotification();
+          return Text('Aca estaba FormNotification()');
         }));
       },
     );

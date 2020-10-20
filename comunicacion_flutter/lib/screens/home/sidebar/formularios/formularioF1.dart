@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:comunicacion/screens/home/sidebar/formularios/firm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,18 +13,32 @@ class F1 extends StatefulWidget with NavigationStates {
 }
 
 class _F1State extends State<F1> {
+  TextEditingController _nombre = new TextEditingController();
+  TextEditingController _justificacion = new TextEditingController();
+  //TextEditingController _date_ = new TextEditingController();
   String _date = "Seleccione Fecha";
   // ignore: unused_field
-  String _nombre;
+  //String _nombre;
   // ignore: unused_field
-  String _justificacion;
-
+  //String _justificacion;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  DateTime fecha() {
+    var hoy = DateTime.now();
+    var martes = 2;
+    if (hoy.weekday <= martes) {
+      hoy = DateTime(hoy.year, hoy.month, hoy.day - 2);
+    }
+    if (hoy.weekday > martes) {
+      hoy = DateTime(hoy.year, hoy.month, hoy.day - 2);
+    }
+    return hoy;
+  }
+
+  static DateTime now = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -39,13 +55,12 @@ class _F1State extends State<F1> {
                     gradient: LinearGradient(
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
-                      
-                    colors: [
-                      Colors.indigo.shade700,
-                      Colors.indigo.shade300,
-                      
-                    ]),
-                    
+
+                      /*colors: [
+                          Colors.indigo.shade700,
+                          Colors.indigo.shade300,
+                        ]*/
+                    ),
                   ),
                   child: Center(
                     child: Text('Formulario F1: Justificar faltas del Alumno',
@@ -65,6 +80,7 @@ class _F1State extends State<F1> {
                       elevation: 4.0,
                       shadowColor: Colors.black,
                       child: TextFormField(
+                        controller: _nombre,
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Nombre '),
                         // ignore: missing_return
@@ -73,9 +89,9 @@ class _F1State extends State<F1> {
                             return 'Ingrese un Nombre Adecuado';
                           }
                         },
-                        onSaved: (String value) {
+                        /*onSaved: (String value) {
                           _nombre = value;
-                        },
+                        },*/
                         onChanged: (value) {
                           setState(() {});
                         },
@@ -86,6 +102,7 @@ class _F1State extends State<F1> {
                       elevation: 4.0,
                       shadowColor: Colors.black,
                       child: TextFormField(
+                        controller: _justificacion,
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         decoration: textInputDecoration.copyWith(
@@ -96,9 +113,10 @@ class _F1State extends State<F1> {
                             return 'Ingrese un Nombre Adecuado';
                           }
                         },
+                        /*
                         onSaved: (String value) {
                           _justificacion = value;
-                        },
+                        },*/
                         onChanged: (value) {
                           setState(() {});
                         },
@@ -115,9 +133,8 @@ class _F1State extends State<F1> {
                                 containerHeight: 210.0,
                               ),
                               showTitleActions: true,
-                              minTime: DateTime(2020, 1, 1),
-                              maxTime: DateTime(2020, 12, 31),
-                              onConfirm: (date) {
+                              minTime: fecha(),
+                              maxTime: now, onConfirm: (date) {
                             print('confirm $date');
                             _date = 'M ${date.month}  - D ${date.day}';
                             setState(() {});
@@ -170,9 +187,13 @@ class _F1State extends State<F1> {
                           color: Colors.indigo.shade300,
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));
+                              postForm(_nombre.text, _justificacion.text, _date,
+                                  "http://127.0.0.1:8000/app/apiformulario1");
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Firm()));
                             }
-                            
                           },
                         )),
                     SizedBox(height: 50),
