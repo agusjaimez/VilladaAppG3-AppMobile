@@ -9,6 +9,7 @@ import 'package:comunicacion/screens/home/form_notifications.dart';
 import 'package:http/http.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:async';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Principal extends StatefulWidget with NavigationStates {
   @override
@@ -22,6 +23,7 @@ class _PrincipalState extends State<Principal> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         
@@ -35,10 +37,14 @@ class _PrincipalState extends State<Principal> {
           
           stream: Stream.periodic(Duration(seconds: 5)).asyncMap(
             
-          (i) => getComunicados()), // i is null here (check periodic docs)
-          builder: (context, snapshot) {
-            return ListView.builder(
+          (i) => getComunicados()),
+           // i is null here (check periodic docs)
+          builder: (context,snapshot) {
+            if (snapshot.hasData) {
+                return ListView.builder(
+              
               itemCount: snapshot.data.length,
+              
               itemBuilder: (context, index) {
                 return Card(
                     child: ListTile(
@@ -66,6 +72,18 @@ class _PrincipalState extends State<Principal> {
                 ));
               },
         );
+              }else{
+                final spinkit = SpinKitChasingDots(color: Colors.indigo.shade300);
+                return Container(
+                  child: Center(
+                      child: spinkit,
+                  )
+                );
+                
+
+              }
+
+            
       }), 
     );
   }

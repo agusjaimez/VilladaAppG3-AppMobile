@@ -7,6 +7,7 @@ import 'package:comunicacion/block_navigation_block/navigation_block.dart';
 import 'package:comunicacion/screens/modelPost/posts.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 
 class AlumnoSelect extends StatefulWidget with NavigationStates {
@@ -28,7 +29,8 @@ class _AlumnoSelectState extends State<AlumnoSelect> {
           stream: Stream.periodic(Duration(seconds: 5)).asyncMap(
               (i) => getAlumnos()), // i is null here (check periodic docs)
           builder: (context, snapshot) {
-            return ListView.builder(
+            if (snapshot.hasData) {
+              return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
                 return Card(
@@ -58,6 +60,15 @@ class _AlumnoSelectState extends State<AlumnoSelect> {
                 ));
               },
             );
+            }else{
+              final spinkit = SpinKitChasingDots(color: Colors.indigo.shade300);
+                return Container(
+                  child: Center(
+                      child: spinkit,
+                  )
+                );
+            }
+            
           }), // builder should also handle the case when data is not fetched yet
     );
 
