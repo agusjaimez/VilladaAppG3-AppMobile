@@ -56,7 +56,6 @@ flutter:
     - family: Comfortaa
       fonts:
           - asset: fonts/Comfortaa-Regular.ttf
-
   uses-material-design: true
   assets:
     - assets/its.jpg

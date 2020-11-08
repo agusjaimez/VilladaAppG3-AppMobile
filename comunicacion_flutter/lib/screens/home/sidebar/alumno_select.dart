@@ -4,8 +4,7 @@ import 'package:comunicacion/screens/home/sidebar/alumno.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:comunicacion/block_navigation_block/navigation_block.dart';
-import 'package:comunicacion/screens/modelPost/posts.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:http/http.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
