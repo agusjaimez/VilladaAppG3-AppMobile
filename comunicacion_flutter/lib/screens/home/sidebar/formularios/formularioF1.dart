@@ -33,8 +33,10 @@ class _F1State extends State<F1> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: SingleChildScrollView(
+        
         child: Form(
           key: _formKey,
           child: Column(
@@ -101,7 +103,7 @@ class _F1State extends State<F1> {
                         // ignore: missing_return
                         validator: (String value) {
                           if (value.isEmpty) {
-                            return 'Ingrese un Nombre Adecuado';
+                            return 'Ingrese una justificacion';
                           }
                         },
                         onSaved: (String value) {

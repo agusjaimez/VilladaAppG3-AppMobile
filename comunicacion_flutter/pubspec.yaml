@@ -9,6 +9,7 @@ environment:
 
 dependencies:
 
+
   gradient_app_bar: ^0.1.3
   image_gallery_saver: '^1.5.0'
   image_picker_saver: ^0.3.0
@@ -55,7 +56,6 @@ flutter:
     - family: Comfortaa
       fonts:
           - asset: fonts/Comfortaa-Regular.ttf
-
   uses-material-design: true
   assets:
     - assets/its.jpg
