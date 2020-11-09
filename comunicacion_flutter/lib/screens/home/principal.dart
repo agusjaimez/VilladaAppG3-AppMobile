@@ -72,7 +72,7 @@ class _PrincipalState extends State<Principal> {
 Future getComunicados() async {
   List list;
   Response response = await get(
-      'http://192.168.0.174:8000/app/apicomunicados/?format=json'); //cambiar direccion ip a la del dispositivo que se corre el  django server en la red local.(haciendo un manage.py runserver 0.0.0.0:8000)
+      'http://192.168.1.144:8000/app/apicomunicados/?format=json'); //cambiar direccion ip a la del dispositivo que se corre el  django server en la red local.(haciendo un manage.py runserver 0.0.0.0:8000)
   list = jsonDecode(response.body);
   print(list);
   return list;
