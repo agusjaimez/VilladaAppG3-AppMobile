@@ -15,21 +15,19 @@ class FormNotification extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: 
-      Column(
-        children: [
-        SingleChildScrollView(
+      body: SafeArea(
+      child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
+            
             children: <Widget>[
-              Stack(
-                children:<Widget>[
                   Container(
-                    width: double.infinity,
-                    height: 557.2,
-                    color: Colors.white
-                  ),
-                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width ,
+                    child: ListView(
+                    children: <Widget>[  
+                    Container(
+                    
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                       begin:Alignment.topCenter,
@@ -94,23 +92,16 @@ class FormNotification extends StatelessWidget {
                         )
                       ),
                   ),
-                  Positioned(
-                    top: 280,
-                    left: 20,
-                    child: Container(
-                      width: 330,
+                   
+                    Container(
+                     height: MediaQuery.of(context).size.height,
+                     
                       child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      
                       children: [
-                        Text(
-                          "Notificacion: ",
-                          style: TextStyle(
-                            color: Colors.indigoAccent,
-                            fontSize: 28,
-                          ),),
                         SizedBox(height: 10),
                         Text(
+                          
                           data['mensaje'],
                           style: TextStyle(
                             fontSize: 22.0,
@@ -119,80 +110,27 @@ class FormNotification extends StatelessWidget {
                             color: Colors.black,
                             letterSpacing: 2.0,
                           ),
-                        )
+                        ),
+                        
                       ],
                     ),
+                    
                   ),
-                ),
-                Positioned(
-                  bottom: 20,
-                  left: 25,     
-                  child: Container(
-                    width: 150,
-                    child: RaisedButton(
-                      onPressed: (){},
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(80.0)
-                      ),
-                      elevation: 5.0,
-                      padding: EdgeInsets.all(0.0),
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.centerRight,
-                            end: Alignment.centerLeft,
-                            colors: [Colors.redAccent,Colors.pinkAccent]
-                          ),
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        child: Container(
-                          constraints: BoxConstraints(maxWidth: 150.0, minHeight: 50.0),
-                          alignment: Alignment.center,
-                          child: Text("No Acepto",
-                          style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight:FontWeight.w300),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 20,
-                  left: 195,  
-                  child: Container(
-                    width: 150,
-                    child: RaisedButton(
-                      onPressed: (){},
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(80.0)
-                      ),
-                      elevation: 5.0,
-                      padding: EdgeInsets.all(0.0),
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.centerRight,
-                            end: Alignment.centerLeft,
-                            colors: [Colors.lightGreen.shade300,Colors.green.shade400]
-                          ),
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        child: Container(
-                          constraints: BoxConstraints(maxWidth: 150.0, minHeight: 50.0),
-                          alignment: Alignment.center,
-                          child: Text("Acepto",
-                          style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight:FontWeight.w300),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )),
+                  
+                 
+                  ]
+                    )
+                  )
+                  
+                  
               ]
-            ),
-          ],
+            
+          
         ),
-      ),]
+      ),
+      
     ),
-  );
+      );
+
   }
 } 
