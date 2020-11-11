@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class FormNotification extends StatelessWidget {
   final Map data;
   FormNotification(this.data);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +18,6 @@ class FormNotification extends StatelessWidget {
       child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
-            
             children: <Widget>[
                   Container(
                     height: MediaQuery.of(context).size.height,
@@ -27,14 +25,13 @@ class FormNotification extends StatelessWidget {
                     child: ListView(
                     children: <Widget>[  
                     Container(
-                    
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                      begin:Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Colors.indigo.shade600, Colors.indigo.shade300]
-                      )
-                    ),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                        begin:Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.indigo.shade600, Colors.indigo.shade300]
+                        )
+                      ),
                     child: Container(
                       width: double.infinity,
                       height: 150,
@@ -60,17 +57,14 @@ class FormNotification extends StatelessWidget {
                         color: Colors.white,
                         elevation: 5.0,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 20.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 20.0),
                           child: Column(
                             children: [
                                 Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  Text("Directivo: "+data['directivo']['first_name'] +" "+data['directivo']['last_name'] .toString(), style: TextStyle(fontSize: 17, fontStyle: FontStyle.italic),),
-                                  // Text(
-                                  //   "Juan Pablo Canepa",style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic),
-                                  // ),
+                                  Text("Directivo: "+data['directivo']['first_name'] +" "+data['directivo']['last_name'] .toString(), style: TextStyle(fontSize: 17, fontStyle: FontStyle.italic),)
                                 ],
                               ),
                               SizedBox(height: 7),
@@ -92,16 +86,13 @@ class FormNotification extends StatelessWidget {
                         )
                       ),
                   ),
-                   
                     Container(
-                     height: MediaQuery.of(context).size.height,
-                     
+                      height: MediaQuery.of(context).size.height,
+                      padding: EdgeInsets.only(left: 5),
                       child: Column(
-                      
                       children: [
                         SizedBox(height: 10),
                         Text(
-                          
                           data['mensaje'],
                           style: TextStyle(
                             fontSize: 22.0,
@@ -109,28 +100,18 @@ class FormNotification extends StatelessWidget {
                             fontWeight: FontWeight.w300,
                             color: Colors.black,
                             letterSpacing: 2.0,
+                            ),
                           ),
-                        ),
-                        
-                      ],
+                        ],
+                      ),
                     ),
-                    
-                  ),
-                  
-                 
                   ]
-                    )
-                  )
-                  
-                  
-              ]
-            
-          
+                )
+              )           
+            ]
+          ),
         ),
       ),
-      
-    ),
-      );
-
+    );
   }
 } 

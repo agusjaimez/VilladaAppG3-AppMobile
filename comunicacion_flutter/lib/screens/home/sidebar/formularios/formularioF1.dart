@@ -1,9 +1,10 @@
-import 'package:comunicacion/screens/home/sidebar/formularios/firm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:comunicacion/block_navigation_block/navigation_block.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:comunicacion/compartido/constant.dart';
+
+import 'firm.dart';
 
 class F1 extends StatefulWidget with NavigationStates {
   @override
@@ -12,10 +13,9 @@ class F1 extends StatefulWidget with NavigationStates {
 
 class _F1State extends State<F1> {
   String _date = "Seleccione Fecha";
-  // ignore: unused_field
-  String _nombre;
-  // ignore: unused_field
-  String _justificacion;
+  String _nombre = "";
+  String _apellido = "";
+  String _justificacion = "";
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   DateTime fecha() {
     var hoy = DateTime.now();
@@ -30,13 +30,10 @@ class _F1State extends State<F1> {
   }
 
   static DateTime now = DateTime.now();
-
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: SingleChildScrollView(
-        
         child: Form(
           key: _formKey,
           child: Column(
@@ -77,17 +74,26 @@ class _F1State extends State<F1> {
                       child: TextFormField(
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Nombre '),
-                        // ignore: missing_return
-                        validator: (String value) {
-                          if (value.isEmpty) {
-                            return 'Ingrese un Nombre Adecuado';
-                          }
+                        validator: (val) => val.isEmpty
+                                ? 'Ingrese una contraseña mas segura'
+                                : null,
+                        onChanged: (val) {
+                          setState(() => _nombre = val);
                         },
-                        onSaved: (String value) {
-                          _nombre = value;
-                        },
-                        onChanged: (value) {
-                          setState(() {});
+                      ),
+                    ),
+                    SizedBox(height: 35),
+                    Material(
+                      elevation: 4.0,
+                      shadowColor: Colors.black,
+                      child: TextFormField(
+                        decoration:
+                            textInputDecoration.copyWith(hintText: 'Apellido '),
+                        validator: (val) => val.isEmpty
+                                ? 'Ingrese un Apellido adecuado'
+                                : null,
+                        onChanged: (val) {
+                          setState(() => _apellido = val);
                         },
                       ),
                     ),
@@ -100,17 +106,11 @@ class _F1State extends State<F1> {
                         maxLines: null,
                         decoration: textInputDecoration.copyWith(
                             hintText: 'Justifique la Falta '),
-                        // ignore: missing_return
-                        validator: (String value) {
-                          if (value.isEmpty) {
-                            return 'Ingrese una justificacion';
-                          }
-                        },
-                        onSaved: (String value) {
-                          _justificacion = value;
-                        },
-                        onChanged: (value) {
-                          setState(() {});
+                        validator: (val) => val.isEmpty
+                                ? 'Ingrese una justificacion adecuada'
+                                : null,
+                        onChanged: (val) {
+                          setState(() => _justificacion = val);
                         },
                       ),
                     ),
@@ -182,7 +182,12 @@ class _F1State extends State<F1> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Firm()));
+                                      builder: (context) => Firm(
+                                            nombre: _nombre,
+                                            apellido: _apellido,
+                                            justificacion: _justificacion,
+                                            date: _date,
+                                          )));
                             }
                           },
                         )),

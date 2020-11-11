@@ -6,14 +6,12 @@ import 'package:comunicacion/screens/home/sidebar/formularios/formularioF3.dart'
 import 'package:comunicacion/screens/home/sidebar/alumno_select.dart';
 
 
-
 enum NavigationEvents {
   PrincipalPageEvent,
   FormularioF1Event,
   FormularioF2Event,
   FormularioF3Event,
   AlumnoSelectEvent,
-
 }
 
 abstract class NavigationStates {}
