@@ -42,7 +42,8 @@ dependencies:
   analyzer: ^0.39.0
   json_annotation: ^3.0.1
 
-  
+  pdf: ^1.11.2
+  flutter_full_pdf_viewer: ^1.0.6
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +57,9 @@ flutter:
     - family: Comfortaa
       fonts:
           - asset: fonts/Comfortaa-Regular.ttf
+    - family: OpenSans
+      fonts:
+          - asset: fonts/OpenSans-Bold.ttf
   uses-material-design: true
   assets:
     - assets/its.jpg

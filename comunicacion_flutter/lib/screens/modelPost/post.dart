@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:comunicacion/screens/modelPost/models_example.dart';
-import 'package:comunicacion/screens/home/form_notifications.dart';
 
 class Post extends StatelessWidget {
   final PostModel post;

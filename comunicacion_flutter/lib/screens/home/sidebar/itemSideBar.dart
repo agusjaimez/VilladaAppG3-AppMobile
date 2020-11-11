@@ -11,30 +11,19 @@ class ItemSideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      
       onTap: onTap,
       child: Padding(
-        
         padding: const EdgeInsets.all(16),
         child: Row(
-          
           children:<Widget>[
-              
               GestureDetector(
-              
               child: Icon(
-                
                 icon,
                 color: Colors.blue.shade800,
-                size: 30,
-                
+                size: 30,  
               ),
             ),
-            
-            
             SizedBox(width: 30),
-            
-              
               Text(
               title,
               style: TextStyle(
@@ -42,7 +31,6 @@ class ItemSideBar extends StatelessWidget {
                   fontSize: 20,
                   color: Colors.white),
             ),
-            
           ],
         ),
       ),

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:comunicacion/block_navigation_block/navigation_block.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
+import 'firm.dart';
+
 class F2 extends StatefulWidget with NavigationStates {
   @override
   _F2State createState() => _F2State();
@@ -11,8 +13,9 @@ class F2 extends StatefulWidget with NavigationStates {
 
 class _F2State extends State<F2> {
   String _hora = "Seleccione Hora";
-  // ignore: unused_field
-  String _nombre;
+  String _nombre = "";
+  String _apellido = "";
+  String _justificacion = "";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -61,17 +64,44 @@ class _F2State extends State<F2> {
                       child: TextFormField(
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Nombre '),
+                        validator: (val) => val.isEmpty
+                                ? 'Ingrese un Nombre adecuado'
+                                : null,
+                        onChanged: (val) {
+                          setState(() => _nombre = val);
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 35),
+                    Material(
+                      elevation: 4.0,
+                      shadowColor: Colors.black,
+                      child: TextFormField(
+                        decoration:
+                            textInputDecoration.copyWith(hintText: 'Apellido '),
                         // ignore: missing_return
-                        validator: (String value) {
-                          if (value.isEmpty) {
-                            return 'Ingrese un Nombre Adecuado';
-                          }
+                       validator: (val) => val.isEmpty
+                                ? 'Ingrese un Apellido adecuado'
+                                : null,
+                        onChanged: (val) {
+                          setState(() => _apellido = val);
                         },
-                        onSaved: (String value) {
-                          _nombre = value;
-                        },
-                        onChanged: (value) {
-                          setState(() {});
+                      ),
+                    ),
+                    SizedBox(height: 35),
+                    Material(
+                      elevation: 4.0,
+                      shadowColor: Colors.black,
+                      child: TextFormField(
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: textInputDecoration.copyWith(
+                            hintText: 'Justifique el Retiro Anticipado '),
+                         validator: (val) => val.isEmpty
+                                ? 'Ingrese una justificacion adecuada'
+                                : null,
+                        onChanged: (val) {
+                          setState(() => _justificacion = val);
                         },
                       ),
                     ),
@@ -135,7 +165,17 @@ class _F2State extends State<F2> {
                                   fontSize: 16.0, color: Colors.white)),
                           color: Colors.indigo.shade300,
                           onPressed: () {
-                            _formKey.currentState.save();
+                             if (_formKey.currentState.validate()) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Firm(
+                                            nombre: _nombre,
+                                            apellido: _apellido,
+                                            justificacion: _justificacion,
+                                            date: _hora,
+                                          )));
+                            }
                           },
                         )),
                     SizedBox(height: 50),

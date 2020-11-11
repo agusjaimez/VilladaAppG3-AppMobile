@@ -12,10 +12,9 @@ class F3 extends StatefulWidget with NavigationStates {
 
 class _F3State extends State<F3> {
   String _hora = "Seleccione Hora";
-  // ignore: unused_field
-  String _nombre;
-  // ignore: unused_field
-  String _justificacion;
+  String _nombre = "";
+  String _apellido = "";
+  String _justificacion = "";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -65,16 +64,44 @@ class _F3State extends State<F3> {
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Nombre '),
                         // ignore: missing_return
-                        validator: (String value) {
-                          if (value.isEmpty) {
-                            return 'Ingrese un Nombre Adecuado';
-                          }
+                       validator: (val) => val.isEmpty
+                                ? 'Ingrese un nombre adecuado'
+                                : null,
+                        onChanged: (val) {
+                          setState(() => _nombre = val);
                         },
-                        onSaved: (String value) {
-                          _nombre = value;
+                      ),
+                    ),
+                     SizedBox(height: 35),
+                    Material(
+                      elevation: 4.0,
+                      shadowColor: Colors.black,
+                      child: TextFormField(
+                        decoration:
+                            textInputDecoration.copyWith(hintText: 'Apellido '),
+                        // ignore: missing_return
+                       validator: (val) => val.isEmpty
+                                ? 'Ingrese un Apellido adecuado'
+                                : null,
+                        onChanged: (val) {
+                          setState(() => _apellido = val);
                         },
-                        onChanged: (value) {
-                          setState(() {});
+                      ),
+                    ),
+                    SizedBox(height: 35),
+                     Material(
+                      elevation: 4.0,
+                      shadowColor: Colors.black,
+                      child: TextFormField(
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: textInputDecoration.copyWith(
+                            hintText: 'Justifique Retiro Anticipado '),
+                         validator: (val) => val.isEmpty
+                                ? 'Ingrese una justificacion adecuada'
+                                : null,
+                        onChanged: (val) {
+                          setState(() => _justificacion = val);
                         },
                       ),
                     ),
@@ -125,29 +152,6 @@ class _F3State extends State<F3> {
                         color: Colors.white),
                     SizedBox(height: 35),
                     Material(
-                      elevation: 4.0,
-                      shadowColor: Colors.black,
-                      child: TextFormField(
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        decoration: textInputDecoration.copyWith(
-                            hintText: 'Justifique Retiro Anticipado '),
-                        // ignore: missing_return
-                        validator: (String value) {
-                          if (value.isEmpty) {
-                            return 'Ingrese un Nombre Adecuado';
-                          }
-                        },
-                        onSaved: (String value) {
-                          _justificacion = value;
-                        },
-                        onChanged: (value) {
-                          setState(() {});
-                        },
-                      ),
-                    ),
-                    SizedBox(height: 35),
-                    Material(
                         color: Color(0xFF00838F),
                         elevation: 18,
                         shape: RoundedRectangleBorder(
@@ -162,9 +166,16 @@ class _F3State extends State<F3> {
                           color: Colors.indigo.shade300,
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Firm()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Firm(
+                                            nombre: _nombre,
+                                            apellido: _apellido,
+                                            justificacion: _justificacion,
+                                            date: _hora,
+                                          )));
                             }
-                            _formKey.currentState.save();
                           },
                         )),
                     SizedBox(height: 50),
