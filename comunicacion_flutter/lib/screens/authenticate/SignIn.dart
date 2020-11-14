@@ -1,8 +1,14 @@
+import 'dart:convert';
+import 'package:comunicacion/screens/home/principal.dart';
 import 'package:flutter/material.dart';
 import 'package:comunicacion/compartido/loading.dart';
 import 'package:comunicacion/services/auth.dart';
 import 'package:comunicacion/compartido/constant.dart';
 import 'package:comunicacion/compartido/its_Img.dart';
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
+import 'package:get_ip/get_ip.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -57,7 +63,9 @@ class _SignInState extends State<SignIn> {
                             validator: (val) => val.isEmpty
                                 ? 'Ingrese un email correcto'
                                 : null,
-                            
+                            onChanged: (val) {
+                              setState(() => email = val);
+                            },
                             decoration:
                                 textInputDecoration.copyWith(hintText: 'Email'),
                           ),
@@ -82,25 +90,48 @@ class _SignInState extends State<SignIn> {
                         child: const Text(
                           'Iniciar Sesión',
                           style: TextStyle(fontSize: 25),
-                          
                         ),
                         color: Colors.white,
                         elevation: 6,
                         shape: StadiumBorder(),
                         onPressed: () async {
-                          if (_formKey.currentState.validate()) {
-                            if (this.mounted) {
-                              setState(() => loading = true);
+                          getDeviceIpAddress();
+                          var _token = getToken(email, password);
+
+                          if (await _token != null) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Principal(token: _token)));
+                          } else if (await _token == null) {
+                            print("xd");
+                            showAlertDialog(BuildContext context) {
+                              Widget okButton = FlatButton(
+                                child: Text("OK"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              );
+
+                              AlertDialog alert = AlertDialog(
+                                title: Text("Usuario incorrecto"),
+                                content: Text(
+                                    "Ingresa un email y una contraseña validos"),
+                                actions: [
+                                  okButton,
+                                ],
+                              );
+
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                },
+                              );
                             }
-                            dynamic result = await _auth.signInEmailPassword(
-                                email, password);
-                            if (result == null) {
-                              setState(() {
-                                error =
-                                    'Porfavor ingrese un email ya registrado';
-                                loading = false;
-                              });
-                            }
+
+                            return showAlertDialog(context);
                           }
                         }),
                     SizedBox(height: 10),
@@ -112,4 +143,20 @@ class _SignInState extends State<SignIn> {
             ),
           );
   }
+}
+
+Future getToken(username, password) async {
+  print(username);
+  print(password);
+  Response response = await post('http://10.0.2.2:8000/api-token-auth/',
+      body: {"username": username, "password": password});
+  Map tokenMap = jsonDecode(response.body);
+  String token = tokenMap["token"];
+  print(token);
+  return token;
+}
+
+getDeviceIpAddress() async {
+  String ipAddress = await GetIp.ipAddress;
+  print(ipAddress);
 }

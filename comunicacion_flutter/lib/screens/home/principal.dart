@@ -9,8 +9,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:async';
 
 class Principal extends StatefulWidget with NavigationStates {
+  final token;
+  const Principal({Key key, this.token}) : super(key: key);
+
   @override
   _PrincipalState createState() => _PrincipalState();
+
 }
 
 class _PrincipalState extends State<Principal> {
@@ -25,7 +29,7 @@ class _PrincipalState extends State<Principal> {
       ),
       body: StreamBuilder(
           stream: Stream.periodic(Duration(seconds: 5))
-              .asyncMap((i) => getComunicados()),
+              .asyncMap((i) => getComunicados(widget.token)),
           // i is null here (check periodic docs)
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -69,10 +73,12 @@ class _PrincipalState extends State<Principal> {
   }
 }
 
-Future getComunicados() async {
+Future getComunicados(token) async {
   List list;
-  Response response = await get(
-      'http://192.168.0.174:8000/app/apicomunicados/?format=json'); //cambiar direccion ip a la del dispositivo que se corre el  django server en la red local.(haciendo un manage.py runserver 0.0.0.0:8000)
+  Response response =
+      await get('http://10.0.2.2:8000/app/apicomunicados/?format=json', headers: {
+    'Authorization': 'Token ' + await token
+  }); //cambiar direccion ip a la del dispositivo que se corre el  django server en la red local.(haciendo un manage.py runserver 0.0.0.0:8000)
   list = jsonDecode(response.body);
   return list;
 }
