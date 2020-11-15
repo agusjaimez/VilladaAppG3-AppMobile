@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:comunicacion/screens/home/principal.dart';
 import 'package:comunicacion/screens/home/sidebar/sideBar_layout.dart';
+import 'package:comunicacion/screens/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:comunicacion/compartido/loading.dart';
 import 'package:comunicacion/services/auth.dart';
@@ -107,9 +108,8 @@ class _SignInState extends State<SignIn> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        SideBarLayout()));
+                                        Wrapper()));
                           } else if (await _token == null) {
-                            print("xd");
                             showAlertDialog(BuildContext context) {
                               Widget okButton = FlatButton(
                                 child: Text("OK"),
@@ -150,8 +150,6 @@ class _SignInState extends State<SignIn> {
 }
 
 Future getToken(username, password) async {
-  print(username);
-  print(password);
   Response response = await post('http://10.0.2.2:8000/api-token-auth/',
       body: {"username": username, "password": password});
   Map tokenMap = jsonDecode(response.body);

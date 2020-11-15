@@ -75,11 +75,11 @@ class _PrincipalState extends State<Principal> {
 
 Future getComunicados() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
-  final token = preferences.getString('email');
+  final token = preferences.getString('token');
   List list;
   Response response =
       await get('http://10.0.2.2:8000/app/apicomunicados/?format=json', headers: {
-    'Authorization': 'Token ' + await token
+    'Authorization': 'Token ' +  token
   }); //cambiar direccion ip a la del dispositivo que se corre el  django server en la red local.(haciendo un manage.py runserver 0.0.0.0:8000)
   list = jsonDecode(response.body);
   return list;

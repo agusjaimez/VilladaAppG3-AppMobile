@@ -1,13 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:comunicacion/block_navigation_block/navigation_block.dart';
+import 'package:comunicacion/screens/authenticate/SignIn.dart';
 import 'package:comunicacion/screens/home/sidebar/itemSideBar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart';
 import 'package:rxdart/rxdart.dart';
-
-
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SideBar extends StatefulWidget {
   @override
@@ -22,11 +22,10 @@ class _SideBarState extends State<SideBar>
   StreamSink<bool> isSideBarOpenSink;
 
   final _animationDuration = const Duration(milliseconds: 500);
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  FirebaseUser user;
+  Map user;
 
   @override
-  void initState() {
+  void initState()  {
     initUser();
     super.initState();
     _animationController =
@@ -34,11 +33,6 @@ class _SideBarState extends State<SideBar>
     isSideBarOpenController = PublishSubject<bool>();
     isSideBarOpenStream = isSideBarOpenController.stream;
     isSideBarOpenSink = isSideBarOpenController.sink;
-  }
-
-  initUser() async {
-    user = await _auth.currentUser();
-    setState(() {});
   }
 
   void dispose() {
@@ -60,9 +54,18 @@ class _SideBarState extends State<SideBar>
       _animationController.forward();
     }
   }
+  initUser() async {
+   var token = await getToken();
+  Response response = await get('http://10.0.2.2:8000/app/user/',
+      headers: {'Authorization': 'Token ' + await token});
+  List list = jsonDecode(response.body);
+  user = list[0];
+  setState(() {});
+}
+
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    if (user != null) {
+    if (getToken() != null) {
       return StreamBuilder<bool>(
         initialData: false,
         stream: isSideBarOpenStream,
@@ -73,7 +76,7 @@ class _SideBarState extends State<SideBar>
             bottom: 0,
             left: isSideBarOpenedAsync.data ? 0 : -screenWidth,
             right: isSideBarOpenedAsync.data ? 0 : screenWidth - 40,
-            child:SafeArea(
+            child: SafeArea(
               child: Row(
                 children: <Widget>[
                   Expanded(
@@ -93,14 +96,14 @@ class _SideBarState extends State<SideBar>
                             height: 100,
                           ),
                           ListTile(
-                            title: Text("${user.displayName}",
+                            title: Text(user["username"],
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 30,
                                   fontWeight: FontWeight.w800,
                                 )),
                             subtitle: Text(
-                              "${user.email}",
+                              user["email"],
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -123,19 +126,19 @@ class _SideBarState extends State<SideBar>
                             endIndent: 32,
                           ),
                           new ListTile(
-                            leading: Icon(Icons.home, color: Colors.blue.shade800),
+                            leading:
+                                Icon(Icons.home, color: Colors.blue.shade800),
                             title: new Text(
                               'Home',
                               style: TextStyle(
-                                fontWeight: FontWeight.w300,
-                                fontSize: 20,
-                                color: Colors.white
-                                ),
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 20,
+                                  color: Colors.white),
                             ),
                             onTap: () {
                               onIconPressed();
-                                BlocProvider.of<NavigationBloc>(context)
-                                    .add(NavigationEvents.PrincipalPageEvent);
+                              BlocProvider.of<NavigationBloc>(context)
+                                  .add(NavigationEvents.PrincipalPageEvent);
                             },
                           ),
                           ExpansionTile(
@@ -146,60 +149,62 @@ class _SideBarState extends State<SideBar>
                                   fontSize: 20,
                                   color: Colors.white),
                             ),
-                            children: <Widget>[  
+                            children: <Widget>[
                               new ListTile(
-                                leading: Icon(Icons.assignment, color: Colors.blue.shade800),
+                                leading: Icon(Icons.assignment,
+                                    color: Colors.blue.shade800),
                                 title: new Text(
                                   'Justificar Faltas (F1)',
                                   style: TextStyle(
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 20,
-                                    color: Colors.white
-                                  ),
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 20,
+                                      color: Colors.white),
                                 ),
                                 onTap: () {
                                   onIconPressed();
-                                    BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.FormularioF1Event);
-                                  },
-                              ),
-                              new ListTile(
-                                leading: Icon(Icons.assignment, color: Colors.blue.shade800),
-                                title: new Text(
-                                  'Retiro imprevisto (F2)',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 20,
-                                    color: Colors.white
-                                  ),
-                                ),
-                                onTap: () {
-                                  onIconPressed();
-                                    BlocProvider.of<NavigationBloc>(context)
-                                            .add(NavigationEvents.FormularioF2Event);
+                                  BlocProvider.of<NavigationBloc>(context)
+                                      .add(NavigationEvents.FormularioF1Event);
                                 },
                               ),
                               new ListTile(
-                                leading: Icon(Icons.assignment, color: Colors.blue.shade800),
-                                title: 
-                                  new Text('Retiro Anticipado (F3)',
-                                    style: TextStyle(
+                                leading: Icon(Icons.assignment,
+                                    color: Colors.blue.shade800),
+                                title: new Text(
+                                  'Retiro imprevisto (F2)',
+                                  style: TextStyle(
                                       fontWeight: FontWeight.w300,
                                       fontSize: 20,
-                                      color: Colors.white
-                                    ),
-                                  ),
+                                      color: Colors.white),
+                                ),
                                 onTap: () {
                                   onIconPressed();
-                                    BlocProvider.of<NavigationBloc>(context)
-                                            .add(NavigationEvents.FormularioF3Event);
-                                  },
+                                  BlocProvider.of<NavigationBloc>(context)
+                                      .add(NavigationEvents.FormularioF2Event);
+                                },
+                              ),
+                              new ListTile(
+                                leading: Icon(Icons.assignment,
+                                    color: Colors.blue.shade800),
+                                title: new Text(
+                                  'Retiro Anticipado (F3)',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 20,
+                                      color: Colors.white),
+                                ),
+                                onTap: () {
+                                  onIconPressed();
+                                  BlocProvider.of<NavigationBloc>(context)
+                                      .add(NavigationEvents.FormularioF3Event);
+                                },
                               ),
                             ],
                           ),
                           ItemSideBar(
                             onTap: () {
                               onIconPressed();
-                              BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.AlumnoSelectEvent);
+                              BlocProvider.of<NavigationBloc>(context)
+                                  .add(NavigationEvents.AlumnoSelectEvent);
                             },
                             icon: Icons.face,
                             title: 'Informacion Alumno',
@@ -218,7 +223,13 @@ class _SideBarState extends State<SideBar>
                                         color: Colors.white),
                                   ),
                                   onTap: () async {
-                                    await _auth.signOut();
+                                    SharedPreferences preferences =
+                                        await SharedPreferences.getInstance();
+                                    preferences.setString('token', null);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => SignIn()));
                                   }),
                             ),
                           ),
@@ -259,6 +270,7 @@ class _SideBarState extends State<SideBar>
     }
   }
 }
+
 class CustomItem extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
@@ -285,3 +297,11 @@ class CustomItem extends CustomClipper<Path> {
     return true;
   }
 }
+
+getToken() async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  var token = preferences.getString('token');
+  return token;
+}
+
+

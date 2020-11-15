@@ -12,10 +12,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
-  final token = preferences.getString('email');
-  print("TOKEEEN");
-  print(token);
-  runApp(MaterialApp(home: token==null ? SignIn() : SideBarLayout()));
+  final token = preferences.getString('token');
+  runApp(MaterialApp(home: token==null ? SignIn() : Wrapper()));
 }
 
 //class MyApp extends StatefulWidget {
