@@ -17,6 +17,7 @@ enum NavigationEvents {
 abstract class NavigationStates {}
 
 class NavigationBloc extends Bloc<NavigationEvents, NavigationStates> {
+  
   NavigationBloc(NavigationStates initialState) : super(Principal());
 
   @override
