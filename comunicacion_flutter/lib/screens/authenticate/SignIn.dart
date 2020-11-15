@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:comunicacion/screens/home/principal.dart';
+import 'package:comunicacion/screens/home/sidebar/sideBar_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:comunicacion/compartido/loading.dart';
 import 'package:comunicacion/services/auth.dart';
@@ -63,7 +64,7 @@ class _SignInState extends State<SignIn> {
                             validator: (val) => val.isEmpty
                                 ? 'Ingrese un email correcto'
                                 : null,
-                            onChanged: (val) {
+                            onChanged: (val) async {
                               setState(() => email = val);
                             },
                             decoration:
@@ -95,15 +96,18 @@ class _SignInState extends State<SignIn> {
                         elevation: 6,
                         shape: StadiumBorder(),
                         onPressed: () async {
-                          getDeviceIpAddress();
+                          var ipAddress = getDeviceIpAddress();
                           var _token = getToken(email, password);
+                          SharedPreferences pref =
+                              await SharedPreferences.getInstance();
 
                           if (await _token != null) {
+                            pref.setString('token', await _token);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        Principal(token: _token)));
+                                        SideBarLayout()));
                           } else if (await _token == null) {
                             print("xd");
                             showAlertDialog(BuildContext context) {
@@ -159,4 +163,5 @@ Future getToken(username, password) async {
 getDeviceIpAddress() async {
   String ipAddress = await GetIp.ipAddress;
   print(ipAddress);
+  return ipAddress;
 }

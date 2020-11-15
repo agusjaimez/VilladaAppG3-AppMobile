@@ -8,9 +8,9 @@ import 'package:http/http.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:async';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Principal extends StatefulWidget with NavigationStates {
-  final token;
-  const Principal({Key key, this.token}) : super(key: key);
 
   @override
   _PrincipalState createState() => _PrincipalState();
@@ -29,7 +29,7 @@ class _PrincipalState extends State<Principal> {
       ),
       body: StreamBuilder(
           stream: Stream.periodic(Duration(seconds: 5))
-              .asyncMap((i) => getComunicados(widget.token)),
+              .asyncMap((i) => getComunicados()),
           // i is null here (check periodic docs)
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -73,7 +73,9 @@ class _PrincipalState extends State<Principal> {
   }
 }
 
-Future getComunicados(token) async {
+Future getComunicados() async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  final token = preferences.getString('email');
   List list;
   Response response =
       await get('http://10.0.2.2:8000/app/apicomunicados/?format=json', headers: {
@@ -82,3 +84,4 @@ Future getComunicados(token) async {
   list = jsonDecode(response.body);
   return list;
 }
+
