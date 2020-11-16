@@ -1,10 +1,18 @@
+import 'dart:convert';
+
+import 'package:comunicacion/screens/wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:comunicacion/block_navigation_block/navigation_block.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:comunicacion/compartido/constant.dart';
-
+import 'package:http/http.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firm.dart';
+import 'package:comunicacion/screens/home/sidebar/formularios/enviar/datos.dart';
+import 'package:comunicacion/screens/home/sidebar/formularios/enviar/api.dart';
+import 'package:intl/intl.dart';
 
 class F1 extends StatefulWidget with NavigationStates {
   @override
@@ -12,10 +20,13 @@ class F1 extends StatefulWidget with NavigationStates {
 }
 
 class _F1State extends State<F1> {
-  String _date = "Seleccione Fecha";
-  String _nombre = "";
-  String _apellido = "";
-  String _justificacion = "";
+  Future<EnvF> _envf;
+  int alumno;
+  String _descripcion;
+  String _tipoform = "F1";
+  String _dias = "Ingrese Fecha";
+
+  
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   DateTime fecha() {
     var hoy = DateTime.now();
@@ -68,35 +79,35 @@ class _F1State extends State<F1> {
                 padding: EdgeInsets.only(left: 30, right: 10),
                 child: Column(
                   children: [
-                    Material(
-                      elevation: 4.0,
-                      shadowColor: Colors.black,
-                      child: TextFormField(
-                        decoration:
-                            textInputDecoration.copyWith(hintText: 'Nombre '),
-                        validator: (val) => val.isEmpty
-                                ? 'Ingrese una contraseña mas segura'
-                                : null,
-                        onChanged: (val) {
-                          setState(() => _nombre = val);
-                        },
-                      ),
-                    ),
+                    // Material(
+                    //   elevation: 4.0,
+                    //   shadowColor: Colors.black,
+                    //   child: TextFormField(
+                    //     decoration:
+                    //         textInputDecoration.copyWith(hintText: 'Nombre '),
+                    //     validator: (val) => val.isEmpty
+                    //             ? 'Ingrese una contraseña mas segura'
+                    //             : null,
+                    //     onChanged: (val) {
+                    //       setState(() => _ = val);
+                    //     },
+                    //   ),
+                    // ),
                     SizedBox(height: 35),
-                    Material(
-                      elevation: 4.0,
-                      shadowColor: Colors.black,
-                      child: TextFormField(
-                        decoration:
-                            textInputDecoration.copyWith(hintText: 'Apellido '),
-                        validator: (val) => val.isEmpty
-                                ? 'Ingrese un Apellido adecuado'
-                                : null,
-                        onChanged: (val) {
-                          setState(() => _apellido = val);
-                        },
-                      ),
-                    ),
+                    // Material(
+                    //   elevation: 4.0,
+                    //   shadowColor: Colors.black,
+                    //   child: TextFormField(
+                    //     decoration:
+                    //         textInputDecoration.copyWith(hintText: 'Apellido '),
+                    //     validator: (val) => val.isEmpty
+                    //             ? 'Ingrese un Apellido adecuado'
+                    //             : null,
+                    //     onChanged: (val) {
+                    //       setState(() => _apellido = val);
+                    //     },
+                    //   ),
+                    // ),
                     SizedBox(height: 35),
                     Material(
                       elevation: 4.0,
@@ -110,7 +121,7 @@ class _F1State extends State<F1> {
                                 ? 'Ingrese una justificacion adecuada'
                                 : null,
                         onChanged: (val) {
-                          setState(() => _justificacion = val);
+                          setState(() => _descripcion = val);
                         },
                       ),
                     ),
@@ -128,7 +139,7 @@ class _F1State extends State<F1> {
                               minTime: fecha(),
                               maxTime: now, onConfirm: (date) {
                             print('confirm $date');
-                            _date = 'M ${date.month}  - D ${date.day}';
+                            _dias = 'M ${date.month}  - D ${date.day}';
                             setState(() {});
                           },
                               currentTime: DateTime.now(),
@@ -149,7 +160,7 @@ class _F1State extends State<F1> {
                                       color: Colors.black,
                                     ),
                                     Text(
-                                      " $_date",
+                                      " $_dias",
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
@@ -177,17 +188,48 @@ class _F1State extends State<F1> {
                               style: TextStyle(
                                   fontSize: 16.0, color: Colors.white)),
                           color: Colors.indigo.shade300,
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState.validate()) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Firm(
-                                            nombre: _nombre,
-                                            apellido: _apellido,
-                                            justificacion: _justificacion,
-                                            date: _date,
-                                          )));
+                                alumno = await getAlumnoId();
+                                var now = new DateTime.now();
+                                var formatter = new DateFormat('yyyy-MM-dd');
+                                String formattedDate = formatter.format(now);
+                                print(formattedDate);
+                             print(alumno.toString() +" "+_descripcion+" "+" "+_tipoform +" " +_dias+ " "+ formattedDate);
+                              setState(() {
+                                _envf = createEnvF(alumno, _descripcion, _tipoform,_dias,formattedDate,null);
+                              });
+
+                               showAlertDialog(BuildContext context) {
+                              Widget okButton = FlatButton(
+                                child: Text("OK"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Wrapper()));
+                                },
+                              );
+
+                              AlertDialog alert = AlertDialog(
+                                title: Text("Formulario Enviado"),
+                                content: Text(
+                                    "Su formulario ha sido enviado satisfactoriamente"),
+                                actions: [
+                                  okButton,
+                                ],
+                              );
+
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                },
+                              );
+                            }
+                            
+                            return showAlertDialog(context);
                             }
                           },
                         )),
@@ -221,4 +263,16 @@ class Clipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return true;
   }
+}
+
+Future getAlumnoId() async{
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  final token = preferences.getString('token');
+  List list;
+  Response response =
+      await get('http://10.0.2.2:8000/app/user/', headers: {
+    'Authorization': 'Token ' +  token
+  });
+  list = jsonDecode(response.body);
+  return list[1]['id'];
 }

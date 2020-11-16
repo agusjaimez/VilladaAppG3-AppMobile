@@ -1,9 +1,16 @@
+import 'dart:convert';
+
 import 'package:comunicacion/compartido/constant.dart';
+import 'package:comunicacion/screens/home/sidebar/formularios/enviar/api.dart';
+import 'package:comunicacion/screens/wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:comunicacion/block_navigation_block/navigation_block.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-
+import 'package:http/http.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'enviar/datos.dart';
 import 'firm.dart';
 
 class F2 extends StatefulWidget with NavigationStates {
@@ -12,10 +19,26 @@ class F2 extends StatefulWidget with NavigationStates {
 }
 
 class _F2State extends State<F2> {
-  String _hora = "Seleccione Hora";
-  String _nombre = "";
-  String _apellido = "";
-  String _justificacion = "";
+  Future<EnvF> _envf;
+  int alumno;
+  String _descripcion;
+  String _tipoform = "F2";
+  String _dias = "Ingrese Fecha";
+  String _hora;
+
+  DateTime fecha() {
+    var hoy = DateTime.now();
+    var martes = 2;
+    if (hoy.weekday <= martes) {
+      hoy = DateTime(hoy.year, hoy.month, hoy.day - 2);
+    }
+    if (hoy.weekday > martes) {
+      hoy = DateTime(hoy.year, hoy.month, hoy.day - 2);
+    }
+    return hoy;
+  }
+
+  static DateTime now = DateTime.now();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -58,36 +81,6 @@ class _F2State extends State<F2> {
                 padding: EdgeInsets.only(left: 30, right: 10),
                 child: Column(
                   children: [
-                    Material(
-                      elevation: 4.0,
-                      shadowColor: Colors.black,
-                      child: TextFormField(
-                        decoration:
-                            textInputDecoration.copyWith(hintText: 'Nombre '),
-                        validator: (val) => val.isEmpty
-                                ? 'Ingrese un Nombre adecuado'
-                                : null,
-                        onChanged: (val) {
-                          setState(() => _nombre = val);
-                        },
-                      ),
-                    ),
-                    SizedBox(height: 35),
-                    Material(
-                      elevation: 4.0,
-                      shadowColor: Colors.black,
-                      child: TextFormField(
-                        decoration:
-                            textInputDecoration.copyWith(hintText: 'Apellido '),
-                        // ignore: missing_return
-                       validator: (val) => val.isEmpty
-                                ? 'Ingrese un Apellido adecuado'
-                                : null,
-                        onChanged: (val) {
-                          setState(() => _apellido = val);
-                        },
-                      ),
-                    ),
                     SizedBox(height: 35),
                     Material(
                       elevation: 4.0,
@@ -97,11 +90,27 @@ class _F2State extends State<F2> {
                         maxLines: null,
                         decoration: textInputDecoration.copyWith(
                             hintText: 'Justifique el Retiro Anticipado '),
-                         validator: (val) => val.isEmpty
-                                ? 'Ingrese una justificacion adecuada'
-                                : null,
+                        validator: (val) => val.isEmpty
+                            ? 'Ingrese una justificacion adecuada'
+                            : null,
                         onChanged: (val) {
-                          setState(() => _justificacion = val);
+                          setState(() => _descripcion = val);
+                        },
+                      ),
+                    ),
+                     SizedBox(height: 35),
+                    Material(
+                      elevation: 4.0,
+                      shadowColor: Colors.black,
+                      child: TextFormField(
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: textInputDecoration.copyWith(
+                            hintText: 'Ingrese hora de retiro '),
+                        validator: (val) =>
+                            val.isEmpty ? 'Ingrese una hora adecuada' : null,
+                        onChanged: (val) {
+                          setState(() => _hora = val);
                         },
                       ),
                     ),
@@ -111,15 +120,19 @@ class _F2State extends State<F2> {
                             borderRadius: BorderRadius.circular(5.0)),
                         elevation: 4.0,
                         onPressed: () {
-                          DatePicker.showTimePicker(context,
-                              showTitleActions: true, onChanged: (date) {
-                            print('Change $date in time zone' +
-                                date.timeZoneOffset.inHours.toString());
-                          }, onConfirm: (date) {
-                            print('confirmar $date');
-                            _hora = '${date.hour} H - ${date.minute} M';
+                          DatePicker.showDatePicker(context,
+                              theme: DatePickerTheme(
+                                containerHeight: 210.0,
+                              ),
+                              showTitleActions: true,
+                              minTime: fecha(),
+                              maxTime: now, onConfirm: (date) {
+                            print('confirm $date');
+                            _dias = 'M ${date.month}  - D ${date.day}';
                             setState(() {});
-                          }, currentTime: DateTime.now());
+                          },
+                              currentTime: DateTime.now(),
+                              locale: LocaleType.en);
                         },
                         child: Container(
                           alignment: Alignment.center,
@@ -136,7 +149,7 @@ class _F2State extends State<F2> {
                                       color: Colors.black,
                                     ),
                                     Text(
-                                      " $_hora",
+                                      " $_dias",
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
@@ -145,7 +158,7 @@ class _F2State extends State<F2> {
                                   ],
                                 ),
                               ),
-                              Text('Hora Retiro')
+                              Text('Seleccionar Fecha')
                             ],
                           ),
                         ),
@@ -164,17 +177,49 @@ class _F2State extends State<F2> {
                               style: TextStyle(
                                   fontSize: 16.0, color: Colors.white)),
                           color: Colors.indigo.shade300,
-                          onPressed: () {
-                             if (_formKey.currentState.validate()) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Firm(
-                                            nombre: _nombre,
-                                            apellido: _apellido,
-                                            justificacion: _justificacion,
-                                            date: _hora,
-                                          )));
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              alumno = await getAlumnoId();
+                              var now = new DateTime.now();
+                              var formatter = new DateFormat('yyyy-MM-dd');
+                              String formattedDate = formatter.format(now);
+                              print(_hora);
+
+                              setState(() {
+                                _envf = createEnvF(alumno, _descripcion,
+                                    _tipoform, null, formattedDate, _hora);
+                              });
+
+                              showAlertDialog(BuildContext context) {
+                                Widget okButton = FlatButton(
+                                  child: Text("OK"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Wrapper()));
+                                  },
+                                );
+
+                                AlertDialog alert = AlertDialog(
+                                  title: Text("Formulario Enviado"),
+                                  content: Text(
+                                      "Su formulario ha sido enviado satisfactoriamente"),
+                                  actions: [
+                                    okButton,
+                                  ],
+                                );
+
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return alert;
+                                  },
+                                );
+                              }
+
+                              return showAlertDialog(context);
                             }
                           },
                         )),
@@ -208,4 +253,14 @@ class Clipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return true;
   }
+}
+
+Future getAlumnoId() async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  final token = preferences.getString('token');
+  List list;
+  Response response = await get('http://10.0.2.2:8000/app/user/',
+      headers: {'Authorization': 'Token ' + token});
+  list = jsonDecode(response.body);
+  return list[1]['id'];
 }

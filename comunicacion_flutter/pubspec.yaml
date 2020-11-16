@@ -47,7 +47,7 @@ dependencies:
 
   shared_preferences: ^0.5.12+4
   get_ip: ^0.4.0
-  
+  intl: ^0.16.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
