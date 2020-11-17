@@ -15,22 +15,3 @@ Future<void> main() async {
   final token = preferences.getString('token');
   runApp(MaterialApp(home: token==null ? SignIn() : Wrapper()));
 }
-
-//class MyApp extends StatefulWidget {
- // @override
- // _MyAppState createState() => _MyAppState();
-//}
-
-//class _MyAppState extends State<MyApp> {
-  //@override
-  //Widget build(BuildContext context) {
-    //return StreamProvider<User>.value(
-      //value: Auth().user,
-      //child: MaterialApp(
-        //debugShowCheckedModeBanner: false,
-        //title: 'Its_comunications',
-        //home: email==null ? SingIn() : Principal(),
-      //),
-    //);
-  //}
-//}

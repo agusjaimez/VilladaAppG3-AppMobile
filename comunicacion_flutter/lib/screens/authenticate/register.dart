@@ -13,17 +13,16 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
-  final Auth _auth = Auth();
 
   final TextEditingController _contra = TextEditingController();
   final TextEditingController _confirmContra = TextEditingController();
 
   bool loading = false;
 
-  String email = '';
-  String password = '';
-  String name = '';
-  String error = '';
+  String email;
+  String password;
+  String name;
+  String error;
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,8 +108,6 @@ class _RegisterState extends State<Register> {
                     ),
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
-                        dynamic result = await _auth.registerEmailPassword(
-                            email, password, name);
 
                         if (this.mounted) {
                           setState(() => loading = true);

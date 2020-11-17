@@ -22,12 +22,11 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
-  final Auth _auth = Auth();
   bool loading = false;
 
-  String email = '';
-  String password = '';
-  String error = '';
+  String email;
+  String password;
+  String error;
 
   Widget build(BuildContext context) {
     return loading
