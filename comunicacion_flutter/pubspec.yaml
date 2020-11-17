@@ -22,17 +22,12 @@ dependencies:
   path_provider: any
     
   flutter_launcher_icons: "^0.8.0"
-
-  firebase_auth: ^0.16.0
-  firebase_database: ^3.0.7
   
   loading_overlay: ^0.2.1
   bouncing_widget: ^1.2.0
 
   provider: ^4.3.2
   flutter_spinkit: "^4.1.2"
-  
-  english_words: ^3.1.5
 
   rxdart: ^0.24.1
   flutter_bloc: ^6.0.1
@@ -41,9 +36,6 @@ dependencies:
   built_collection: ^4.3.2
   analyzer: ^0.39.0
   json_annotation: ^3.0.1
-
-  pdf: ^1.11.2
-  flutter_full_pdf_viewer: ^1.0.6
 
   shared_preferences: ^0.5.12+4
   get_ip: ^0.4.0
