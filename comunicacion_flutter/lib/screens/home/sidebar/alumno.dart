@@ -1,18 +1,12 @@
-
-
 import 'package:flutter/material.dart';
 
-
 class Alumno extends StatelessWidget {
- 
-
   final Map data;
 
   Alumno(this.data);
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
@@ -32,29 +26,43 @@ class Alumno extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 color: Colors.white,
                 child: Container(
-                    
                     width: double.infinity,
                     height: 200.0,
                     child: ListView(
-                      
                       children: <Widget>[
-                        
                         SizedBox(
                           height: 20,
                         ),
-                        
-                        
-                        Text("Alumno: "+data['first_name']+" "+data['last_name'] .toString(), style: TextStyle(fontSize: 20, fontStyle: FontStyle.normal),),
-                        SizedBox( height: 10, ),
-                        Text("Curso: "+data['curso'].toString(), style: TextStyle(fontSize: 20, fontStyle: FontStyle.normal),),
-                        SizedBox( height: 10, ),
-                        Text("Dni: "+data['dni'].toString(), style: TextStyle(fontSize: 20, fontStyle: FontStyle.normal),),
-                        SizedBox( height: 10, ),
-                        Text("Tutor: "+data['tutor']["first_name"]+" "+data['tutor']["last_name"].toString(), style: TextStyle(fontSize: 20, fontStyle: FontStyle.normal,),),
-                        SizedBox(height: 30,),
-                       
-                        
-                        
+                        Text(
+                          "Alumno: " +
+                              data['first_name'] +
+                              " " +
+                              data['last_name'],
+                          style: TextStyle(
+                              fontSize: 20, fontStyle: FontStyle.normal),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Curso: " + data['curso'],
+                          style: TextStyle(
+                              fontSize: 20, fontStyle: FontStyle.normal),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Dni: " + data['dni'],
+                          style: TextStyle(
+                              fontSize: 20, fontStyle: FontStyle.normal),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
                       ],
                     )),
               )
@@ -63,8 +71,5 @@ class Alumno extends StatelessWidget {
         ),
       ),
     );
-
-
   }
-  
 }

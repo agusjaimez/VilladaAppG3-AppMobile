@@ -25,7 +25,7 @@ class _SideBarState extends State<SideBar>
   Map user;
 
   @override
-  void initState()  {
+  void initState() {
     initUser();
     super.initState();
     _animationController =
@@ -54,14 +54,15 @@ class _SideBarState extends State<SideBar>
       _animationController.forward();
     }
   }
+
   initUser() async {
-   var token = await getToken();
-  Response response = await get('http://10.0.2.2:8000/app/user/',
-      headers: {'Authorization': 'Token ' + await token});
-  List list = jsonDecode(response.body);
-  user = list[0];
-  setState(() {});
-}
+    var token = await getToken();
+    Response response = await get('http://10.0.2.2:8000/app/user/',
+        headers: {'Authorization': 'Token ' + await token});
+    List list = jsonDecode(response.body);
+    user = list[0];
+    setState(() {});
+  }
 
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -116,6 +117,16 @@ class _SideBarState extends State<SideBar>
                                 color: Colors.white,
                               ),
                               radius: 40,
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 15),
+                            child: Text(
+                             user['first_name'] + ' ' + user['last_name'],
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                           Divider(
@@ -205,6 +216,7 @@ class _SideBarState extends State<SideBar>
                               onIconPressed();
                               BlocProvider.of<NavigationBloc>(context)
                                   .add(NavigationEvents.AlumnoSelectEvent);
+                              print("PUTO");
                             },
                             icon: Icons.face,
                             title: 'Informacion Alumno',
@@ -303,5 +315,3 @@ getToken() async {
   var token = preferences.getString('token');
   return token;
 }
-
-
