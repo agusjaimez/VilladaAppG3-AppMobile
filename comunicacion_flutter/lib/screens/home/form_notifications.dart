@@ -167,10 +167,6 @@ class _FormNotificationState extends State<FormNotification> {
 }
 
 Future comunicadoRecibido(recibido, id) async {
-  print("TUVIEJAA");
-  print(recibido);
-  print(id);
-
   SharedPreferences preferences = await SharedPreferences.getInstance();
   final token = preferences.getString('token');
   Response response = await post(
