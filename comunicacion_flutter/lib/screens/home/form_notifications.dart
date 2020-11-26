@@ -28,9 +28,8 @@ class _FormNotificationState extends State<FormNotification> {
         ),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(children: <Widget>[
+        child: ListView(
+          scrollDirection: Axis.vertical,children: <Widget>[
             Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
@@ -90,7 +89,7 @@ class _FormNotificationState extends State<FormNotification> {
                                 ],
                               ),
                               SizedBox(height: 7),
-                              Row(
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -114,7 +113,6 @@ class _FormNotificationState extends State<FormNotification> {
                             ]))),
                   ),
                   Container(
-                    height: MediaQuery.of(context).size.height,
                     padding: EdgeInsets.only(left: 5),
                     child: Column(
                       children: [
@@ -129,7 +127,7 @@ class _FormNotificationState extends State<FormNotification> {
                             letterSpacing: 2.0,
                           ),
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: 1),
                         Row(
                           children: [
                             Checkbox(
@@ -155,13 +153,14 @@ class _FormNotificationState extends State<FormNotification> {
                             Text("Me doy por Notificado/a")
                           ],
                         ),
+                        SizedBox(height: 100),
                       ],
                     ),
                   ),
                 ])),
           ]),
         ),
-      ),
+      
     );
   }
 }
